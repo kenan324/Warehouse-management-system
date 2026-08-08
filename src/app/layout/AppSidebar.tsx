@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useSidebar } from '../context/SidebarProvider'
-
+import { HorizontaLIcon, OrderIcon } from '../icons'
 const AppSidebar = () => {
 
     const { isOpen, isHovered, toggleSidebar, setIsHovered } = useSidebar();
@@ -21,7 +21,7 @@ const AppSidebar = () => {
         onMouseEnter={() => !isOpen && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         >
-            <div className='flex flex-col overflow-y-auto duration-300 ease-linear'>
+            <div className='flex flex-col overflow-y-hidden duration-300 ease-linear no-scrollbar'>
                 <nav className='mb-4'>
                     <div className='flex flex-col gap-4 overflow-hidden'>
                         <h2 className={`mb-4 text-xs uppercase flex leading-5 text-gray-400 ${
@@ -33,13 +33,14 @@ const AppSidebar = () => {
                             { isOpen || isHovered ? (
                                 "menu"
                             ) : (
-                                " "
+                                <HorizontaLIcon className="w-6 h-6"
+                                />
                             )}
                         </h2>
                             { isOpen || isHovered ? (
                                 "Order"
                             ) : (
-                                " "
+                                <OrderIcon className="w-6 h-6"/>
                             )}
                     </div>
                 </nav>
