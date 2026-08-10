@@ -24,7 +24,7 @@ const navItems: NavItems[] = [
     {
         icon: <InventoryIcon />,
         name: "Inventory",
-        subItems: [{name: "Stock", path: "/stock-itmes"}]
+        subItems: [{name: "Stock", path: "/stock-items"}]
     },
     {
         icon: <OrderIcon />,

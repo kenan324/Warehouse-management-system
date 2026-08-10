@@ -1,4 +1,4 @@
-import EmployeIcon from "./noun-employe-6396844.svg"
+import EmployeeIcon from "./noun-employe-6396844.svg"
 import GridIcon from "./noun-grid-367801.svg"
 import HorizontaLIcon from "./noun-horizontal-dots-4852500.svg"
 import InventoryIcon from "./noun-inventory-8072941.svg"
@@ -10,7 +10,7 @@ import WarehouseIcon from "./noun-warehouse-7821041.svg"
 import ChevronDownIcon from "./noun-down-chevron-7734487.svg"
 
 export {
-    EmployeIcon,
+    EmployeeIcon,
     GridIcon,
     HorizontaLIcon,
     InventoryIcon,
