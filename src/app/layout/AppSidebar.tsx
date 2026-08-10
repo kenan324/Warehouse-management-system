@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSidebar } from '../context/SidebarProvider'
-import { ChevronDownIcon, EmployeIcon, GridIcon, HorizontaLIcon, InventoryIcon, OrderIcon, ShipmentIcon } from '../icons'
+import { ChevronDownIcon, EmployeeIcon, GridIcon, HorizontaLIcon, InventoryIcon, OrderIcon, ShipmentIcon } from '../icons'
 import { spawn } from 'child_process';
 import Link from 'next/link';
 import path from 'path';
@@ -19,7 +19,7 @@ const navItems: NavItems[] = [
     {
         icon: <GridIcon />,
         name: "Dashboard",
-        path: "/dashobard"
+        path: "/dashboard"
     },
     {
         icon: <InventoryIcon />,
@@ -37,7 +37,7 @@ const navItems: NavItems[] = [
         path: "/shipment"
     },
     {
-        icon: <EmployeIcon />,
+        icon: <EmployeeIcon />,
         name: "Employe",
         path: "/employe"
     },
@@ -49,10 +49,10 @@ const AppSidebar = () => {
     const pathname = usePathname();
 
     const renderMenuItems = (
-        navItmes: NavItems[]
+        navItems: NavItems[]
     ) => (
         <ul className='flex flex-col gap-4'>
-            {navItmes.map((nav, index) => (
+            {navItems.map((nav, index) => (
                 <li key={nav.name}>
                     {nav.subItems ? (
                         <button
