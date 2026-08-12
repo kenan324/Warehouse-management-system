@@ -2,9 +2,10 @@
 
 import PageBreadcrumbNav from "@/app/components/breadcrumbnav/breadcrumbNav";
 import Searchbar from "@/app/components/searchbar/searchbar";
-import Button from "@/app/components/ui/Button/Button";
+import ItemTable from "@/app/components/table/item-table";
+import Button from "@/app/components/ui/Button/button";
 import { useRouter } from "next/navigation";
-
+import { PlusIcon } from "@/app/icons";
 
 export default function Stock() {
     const router  = useRouter();
@@ -16,12 +17,17 @@ export default function Stock() {
             <PageBreadcrumbNav pageTitle="Inventory" path="inventory/stock-items" />
             <div className="flex items-center justify-between mt-4 p-6 bg-white rounded-lg shadow-md">
                 <Searchbar />
-                <Button size="sm" variant="outline" className="flex items-center"
+                <Button size="sm" variant="primary" 
+                className={`flex items-center
+              bg-[#0A66C2]  text-white hover:bg-[#16437E] focus:bg-[#16437E] active:bg-[#09223b] active:text-white/70 
+                `}
+                startIcon={ <PlusIcon className="w-3 h-3"/> }
                 onClick={() => router.push("/add-item")}
                 >
                     Add Item
                 </Button>
             </div>
+            <ItemTable />
         </div>
     );
 }

@@ -8,6 +8,7 @@ import OrderListIcon from "./noun-order-8384776.svg"
 import ShipmentIcon from "./noun-shipment-8286619.svg"
 import WarehouseIcon from "./noun-warehouse-7821041.svg"
 import ChevronDownIcon from "./noun-down-chevron-7734487.svg"
+import PlusIcon from "./plus-small-svgrepo-com.svg"
 
 export {
     EmployeeIcon,
@@ -20,4 +21,5 @@ export {
     ShipmentIcon,
     WarehouseIcon,
     ChevronDownIcon,
+    PlusIcon,
 }
