@@ -1,6 +1,6 @@
 "use client"
 
-import PageBreadcrumbNav from "@/app/components/breadcrumbnav/breadcrumbNav";
+import PageBreadcrumbNav from "@/app/components/componentsCards/breadcrumbnav/PageBreadcrumbNav";
 import Searchbar from "@/app/components/searchbar/searchbar";
 import ItemTable from "@/app/components/table/item-table";
 import Button from "@/app/components/ui/Button/button";
