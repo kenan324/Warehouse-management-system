@@ -1,6 +1,6 @@
 "use client"
 import React, {useState} from "react";
-import { useSidebar } from "../context/SidebarProvider";
+import { useSidebar } from "@/context/SidebarProvider";
 
 
 const AppHeader = () => {

@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSidebar } from '../context/SidebarProvider'
-import { ChevronDownIcon, EmployeeIcon, GridIcon, HorizontaLIcon, InventoryIcon, OrderIcon, ShipmentIcon } from '../icons'
+import { useSidebar } from '@/context/SidebarProvider';
+import { ChevronDownIcon, EmployeeIcon, GridIcon, HorizontaLIcon, InventoryIcon, OrderIcon, ShipmentIcon } from '@/icons';
 import { spawn } from 'child_process';
 import Link from 'next/link';
 import path from 'path';

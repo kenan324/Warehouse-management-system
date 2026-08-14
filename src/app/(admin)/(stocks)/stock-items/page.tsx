@@ -1,11 +1,11 @@
 "use client"
 
-import PageBreadcrumbNav from "@/app/components/componentsCards/breadcrumbnav/PageBreadcrumbNav";
-import Searchbar from "@/app/components/searchbar/searchbar";
-import ItemTable from "@/app/components/table/item-table";
-import Button from "@/app/components/ui/Button/button";
+import PageBreadcrumbNav from "@/components/components-cards/PageBreadcrumbNav";
+import Searchbar from "@/components/ui/Searchbar/Searchbar";
+import ItemTable from "@/components/table/Item-table";
+import Button from "@/components/ui/Button/Button";
 import { useRouter } from "next/navigation";
-import { PlusIcon } from "@/app/icons";
+import { PlusIcon } from "@/icons";
 
 export default function Stock() {
     const router  = useRouter();
