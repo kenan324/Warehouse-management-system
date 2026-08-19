@@ -1,6 +1,6 @@
 "use server"
 
-import { createItemSchema, itemSchema } from "@/schemas/item_schema";
+import { createItemSchema, itemSchema } from "@/schemas/item-schema";
 import { itemService } from "@/service/ItemService";
 import { ActionResult } from "next/dist/shared/lib/app-router-types";
 
