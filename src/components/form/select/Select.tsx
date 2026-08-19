@@ -11,7 +11,7 @@ interface SelectProps {
     id?: string;
     name?: string;
     defaultValue?: string;
-    onChange: (val: string) => void;
+    onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void; 
     className?: string;
     placeholder?: string;
     required?: boolean;
@@ -32,8 +32,8 @@ const Select: React.FC<SelectProps> = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
-        setSelectedValue(value);
-        onChange(value);
+        setSelectedValue(value); // let the value be string for now
+        onChange?.(e);
     }
     return (
         <select
