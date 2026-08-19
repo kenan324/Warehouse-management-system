@@ -2,7 +2,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface InputProps {
-    type?: string;
+    type?: "text" | "number" | "email" | "password" | string;
     id?: string;
     name?: string;
     placeholder?: string;
@@ -11,7 +11,8 @@ interface InputProps {
     className?: string;
     min?: string;
     max?: string;
-    disabled?: boolean
+    disabled?: boolean;
+    required?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,7 +25,8 @@ const Input: React.FC<InputProps> = ({
     className,
     min,
     max,
-    disabled 
+    disabled,
+    required,
 }) => {
 
     return (
@@ -37,7 +39,8 @@ const Input: React.FC<InputProps> = ({
             onChange={onChange}
             min={min}
             max={max}
-            disabled={disabled} 
+            disabled={disabled}
+            required={required}
             className={twMerge(`border rounded-lg px-3 py-2 border-transparent outline-none bg-[#f3f3f3] transition-all duration-500 hover:border-[#4a9dec] focus:border-[#4a9dec] focus:shadow-[0_0_0_7px_rgb(74_157_236/20%)] focus:bg-white)`
                 , className)}
             />

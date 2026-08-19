@@ -8,18 +8,24 @@ interface Option {
 
 interface SelectProps {
     options: Option[];
+    id?: string;
+    name?: string;
     defaultValue?: string;
     onChange: (val: string) => void;
     className?: string;
     placeholder?: string;
+    required?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
+    id,
+    name,
     options,
     defaultValue = "",
     onChange,
     className = "",
-    placeholder = "Placeholder"
+    placeholder = "Placeholder",
+    required,
 }) => {
 
     const [selectedValue, setSelectedValue] = useState<string>(defaultValue)
@@ -31,6 +37,8 @@ const Select: React.FC<SelectProps> = ({
     }
     return (
         <select
+        id={id}
+        name={name}
         className={
         twMerge(`appearance-none border rounded-lg px-3 py-2 border-transparent outline-none bg-[#f3f3f3] transition-all duration-500 hover:border-[#4a9dec] focus:border-[#4a9dec] focus:shadow-[0_0_0_7px_rgb(74_157_236/20%)] focus:bg-white
             ${ selectedValue
@@ -40,6 +48,7 @@ const Select: React.FC<SelectProps> = ({
         `, className)}
         value={selectedValue}
         onChange={handleChange}
+        required={required}
         >
             {/* Placeholder option*/}
             <option 
