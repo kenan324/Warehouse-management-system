@@ -4,8 +4,9 @@ import GalleryCard from "@/components/components-cards/GalleryCard";
 import ComponentsCard from "@/components/components-cards/ComponentCard";
 import Input from "@/components/form/input/InputField";
 import Select from "@/components/form/select/Select";
-import { ChevronDownIcon } from "@/icons";
-import { useState } from "react";
+import { useActionState } from "react";
+import { submitActionFrom } from "@/action/item-action";
+import { initialActionState } from "@/schemas/item_schema";
 
 type Option = {
     name: string;
@@ -47,7 +48,10 @@ const options: Option[] = [
 ];
 
 export default function AddItem() {
-
+    const [state, fromAction] = useActionState(
+        submitActionFrom,
+        initialActionState
+    );
     const handleSelectChange = (value: string) => {};
 
     //find the appropriate select box
@@ -55,23 +59,35 @@ export default function AddItem() {
     options.find((option) => option.name === name)?.subOptions ?? [];
 
     return (
-        <div >
+        <form action={fromAction}>
             <PageBreadcrumbNav pageTitle="Add Item" path="inventory\add-item"/>
             <div className="flex flex-col gap-6">
                 <ComponentsCard title="Information">
                     <div className="grid grid-cols-2 gap-6">
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="name">Name</label>
-                                <Input id="name" placeholder="Enter here" />
+                                <label htmlFor="name"
+                                className={state.fieldError?.name ? "text-red-500" : ""}
+                                >
+                                    {state.fieldError?.name ? "*Name" : "Name"}
+                                </label>
+                                <Input  id="name" placeholder="Enter here" />
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="sku">SKU</label>
+                                <label htmlFor="sku"
+                                className={state.fieldError?.sku ? "text-red-500" : ""}
+                                >
+                                    {state.fieldError?.sku ? "*Sku" : "Sku"}
+                                </label>
                                 <Input id="sku" placeholder="Enter here" />
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="unit">Unit</label>
+                                <label htmlFor="unit"
+                                className={state.fieldError?.unit ? "text-red-500" : ""}
+                                >
+                                    {state.fieldError?.unit ? "*Unit" : "Unit"}
+                                </label>
                                 <Select                                 
                                     options={selectedOption("Unit")}
                                     placeholder="Select an option"
@@ -81,7 +97,11 @@ export default function AddItem() {
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2 ">
-                                <label htmlFor="itemMastersStatus">Item master status</label>
+                                <label htmlFor="itemMastersStatus"
+                                className={state.fieldError?.itemMastersStatus ? "text-red-500" : ""}
+                                >
+                                    {state.fieldError?.itemMastersStatus ? "*itemMastersStatus" : "itemMastersStatus"}
+                                </label>
                                  <Select                                 
                                     options={selectedOption("ItemMasterStatus")}
                                     placeholder="Select an option"
@@ -138,6 +158,9 @@ export default function AddItem() {
                     <Input placeholder="Enter here" />
                 </ComponentsCard>
             </div>
-        </div>
+            <button type="submit">
+                Submit
+            </button>
+        </form>
     );
 }
