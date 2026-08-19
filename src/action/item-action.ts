@@ -14,7 +14,7 @@ export async function submitActionFrom(
             name: formData.get('name') as string,
             sku: formData.get('sku') as string,
             unit: formData.get('unit') as string,
-            itemMasterStatus: formData.get('itemMastersStatus') as string,
+            itemMasterStatus: formData.get('itemMasterStatus') as string,
         }
 
         const parsed = createItemSchema.safeParse(data);
