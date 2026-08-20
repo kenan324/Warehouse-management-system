@@ -160,7 +160,7 @@ export default function AddItem() {
                     <Input placeholder="Enter here" />
                 </ComponentsCard>
             </div>
-            <Button type="submit">
+            <Button type="submit" disabled={!fromValid}>
                 Select
             </Button>
         </form>
