@@ -13,7 +13,7 @@ export function useItem() {
 
     const fromValid = Object.values(form).every(value => value.trim());
 
-    // handleChange of HtmlInputElements or HtmlSelectElements ets...
+    // handle Change to HtmlInputElements or HtmlSelectElements ets...
     function handleChange 
     <T extends { name: string; value:string } >
         (e: React.ChangeEvent<T>) {
