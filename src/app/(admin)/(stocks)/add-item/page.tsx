@@ -71,7 +71,7 @@ export default function AddItem() {
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-2">
                                 <InputLabel htmlFor="name" value={form.name}>
-                                    {form.name.trim() === "" ? "*Name" : "Name"}
+                                   Name
                                 </InputLabel>
                                 <Input  id="name" name="name" placeholder="Enter here" min="1" max="20" required
                                 onChange={handleChange}
@@ -79,7 +79,7 @@ export default function AddItem() {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <InputLabel htmlFor="sku" value={form.sku}>
-                                    {form.sku.trim() === "" ? "*SKU" : "SKU"}
+                                    SKU
                                 </InputLabel>
                                 <Input id="sku" name="sku" placeholder="Enter here" min="1" max="20" required
                                 onChange={handleChange}
@@ -88,7 +88,7 @@ export default function AddItem() {
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2">
                                 <InputLabel htmlFor="unit" value={form.unit}>
-                                    {form.unit.trim() === "" ? "*Unit" : "Unit"}
+                                    Unit
                                 </InputLabel>
                                 <Select  
                                     id="unit"
@@ -103,7 +103,7 @@ export default function AddItem() {
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2 ">
                                 <InputLabel htmlFor="itemMasterStatus" value={form.itemMasterStatus}>
-                                    {form.itemMasterStatus.trim() === "" ? "*ItemMasterStatus" : "ItemMasterStatus"}
+                                    ItemMasterStatus
                                 </InputLabel>
                                  <Select    
                                     id="itemMasterStatus"
@@ -123,36 +123,62 @@ export default function AddItem() {
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label>UPC</label>
-                            <Input placeholder="Enter here" />
+                            <InputLabel htmlFor="upc">
+                                UPC
+                            </InputLabel>
+                            <Input id="upc" name="upc" placeholder="Enter here" min="1" max="20" required
+                            onChange={handleChange}
+                            />
                         </div>
                         {/* dropdown*/}
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="vendor" >Vendor</label>
-                            <Select                                 
+                            <InputLabel>
+                                Vendor
+                            </InputLabel>
+                            <Select
+                                id="vendor"
+                                name="vendor"                                 
                                 options={selectedOption("Vendor")}
                                 placeholder="Select an option"
+                                onChange={handleChange}
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="enm">ENM</label>
-                            <Input id="enm" placeholder="Enter here" />
+                            <InputLabel htmlFor="enm">
+                                ENM
+                            </InputLabel>
+                            <Input id="enm" name="enm" placeholder="Enter here" min="1" max="20" required
+                            onChange={handleChange}
+                            />
                         </div>
                         {/* dropdown*/}
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="brand">Brand</label>
-                            <Select                                 
+                            <InputLabel htmlFor="brand">
+                                Brand
+                            </InputLabel>
+                            <Select
+                                id="brand"
+                                name="brand"                                 
                                 options={selectedOption("Brand")}
                                 placeholder="Select an option"
+                                onChange={handleChange}
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="dimension">Dimension</label>
-                            <Input id="dimension" placeholder="Enter here" />
+                            <InputLabel htmlFor="dimension" >
+                                Dimension
+                            </InputLabel>
+                            <Input id="dimension" name="dimension" placeholder="Enter here" min="1" max="20" required
+                            onChange={handleChange}
+                            />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="weight">Weight</label>
-                            <Input id="weight" placeholder="Enter here" />
+                            <InputLabel htmlFor="weight" >
+                                Weight
+                            </InputLabel>
+                            <Input id="weight" name="weight" placeholder="Enter here" min="1" max="20" required
+                            onChange={handleChange}
+                            />
                         </div>
                     </div>
                 </ComponentsCard>

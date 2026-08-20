@@ -15,6 +15,12 @@ export async function submitActionFrom(
             sku: formData.get('sku') as string,
             unit: formData.get('unit') as string,
             itemMasterStatus: formData.get('itemMasterStatus') as string,
+            upc: formData.get('upc') as string,
+            enm: formData.get('enm') as string,
+            dimension: formData.get('dimension') as string,
+            vendor: formData.get('vendor') as string,
+            brand: formData.get('brand') as string,
+            weight: formData.get('weight') as string,
         }
 
         const parsed = createItemSchema.safeParse(data);

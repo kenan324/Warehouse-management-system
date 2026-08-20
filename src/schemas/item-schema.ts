@@ -6,8 +6,14 @@ export const itemSchema = z.object({
     name: z.string(),
     sku: z.string(),
     unit: z.string(),
-    itemMasterStatus: z.string()
-});
+    itemMasterStatus: z.string(),
+    upc: z.string(),
+    enm: z.string(),
+    dimension: z.string(),
+    vendor: z.string(),
+    brand: z.string(),
+    weight: z.string(),
+}); // for now the data will not be structured  
 
 export const createItemSchema = itemSchema.omit({ id:true});
 export const updateItemSchema = createItemSchema.partial();
