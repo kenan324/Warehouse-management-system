@@ -8,9 +8,11 @@ interface InputLabelPrev {
 
 const InputLabel: React.FC<InputLabelPrev> = ({
     htmlFor,
-    value,
+    value = "default", // default behavioral val
     children,
 }) =>{
+
+    
 
     return(
         <label 
@@ -20,7 +22,7 @@ const InputLabel: React.FC<InputLabelPrev> = ({
             value.trim() === "" ? "text-red-500" : "text-black"
         }`}
         >
-            {children}
+           { value.trim() === "" ? `*${children}` : children}
         </label>
     );
 };
