@@ -4,17 +4,15 @@ import GalleryCard from "@/components/components-cards/GalleryCard";
 import ComponentsCard from "@/components/components-cards/ComponentCard";
 import Input from "@/components/form/input/InputField";
 import Select from "@/components/form/select/Select";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { submitActionFrom } from "@/action/item-action";
-import { initialActionState } from "@/schemas/item_schema";
+import { initialActionState } from "@/schemas/item-schema";
+import Button from "@/components/ui/Button/Button";
+import InputLabel from "@/components/components-cards/InputLabel";
+import { Option } from "@/type/option-type";
+import { useItem } from "@/hook/Item-Hook/useItem";
 
-type Option = {
-    name: string;
-    subOptions: { value: string; label: string;}[]
-}
-
-
-const options: Option[] = [
+const options: Option[]= [
     {
         name: "Unit",
         subOptions: [
@@ -52,7 +50,13 @@ export default function AddItem() {
         submitActionFrom,
         initialActionState
     );
-    const handleSelectChange = (value: string) => {};
+
+    const {
+        form,
+        fromValid,
+        setFrom,
+        handleChange,
+    } = useItem();
 
     //find the appropriate select box
     const selectedOption = (name: string) =>
@@ -66,48 +70,48 @@ export default function AddItem() {
                     <div className="grid grid-cols-2 gap-6">
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="name"
-                                className={state.fieldError?.name ? "text-red-500" : ""}
-                                >
-                                    {state.fieldError?.name ? "*Name" : "Name"}
-                                </label>
-                                <Input  id="name" placeholder="Enter here" />
+                                <InputLabel htmlFor="name" value={form.name}>
+                                    {form.name.trim() === "" ? "*Name" : "Name"}
+                                </InputLabel>
+                                <Input  id="name" name="name" placeholder="Enter here" min="1" max="20" required
+                                onChange={handleChange}
+                                />
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="sku"
-                                className={state.fieldError?.sku ? "text-red-500" : ""}
-                                >
-                                    {state.fieldError?.sku ? "*Sku" : "Sku"}
-                                </label>
-                                <Input id="sku" placeholder="Enter here" />
+                                <InputLabel htmlFor="sku" value={form.sku}>
+                                    {form.sku.trim() === "" ? "*SKU" : "SKU"}
+                                </InputLabel>
+                                <Input id="sku" name="sku" placeholder="Enter here" min="1" max="20" required
+                                onChange={handleChange}
+                                />
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="unit"
-                                className={state.fieldError?.unit ? "text-red-500" : ""}
-                                >
-                                    {state.fieldError?.unit ? "*Unit" : "Unit"}
-                                </label>
-                                <Select                                 
+                                <InputLabel htmlFor="unit" value={form.unit}>
+                                    {form.unit.trim() === "" ? "*Unit" : "Unit"}
+                                </InputLabel>
+                                <Select  
+                                    id="unit"
+                                    name="unit"                               
                                     options={selectedOption("Unit")}
                                     placeholder="Select an option"
-                                    onChange={handleSelectChange}
+                                    onChange={handleChange}
+                                    required
                                 >
                                 </Select>
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2 ">
-                                <label htmlFor="itemMastersStatus"
-                                className={state.fieldError?.itemMastersStatus ? "text-red-500" : ""}
-                                >
-                                    {state.fieldError?.itemMastersStatus ? "*itemMastersStatus" : "itemMastersStatus"}
-                                </label>
-                                 <Select                                 
+                                <InputLabel htmlFor="itemMasterStatus" value={form.itemMasterStatus}>
+                                    {form.itemMasterStatus.trim() === "" ? "*ItemMasterStatus" : "ItemMasterStatus"}
+                                </InputLabel>
+                                 <Select    
+                                    id="itemMasterStatus"
+                                    name="itemMasterStatus"                              
                                     options={selectedOption("ItemMasterStatus")}
                                     placeholder="Select an option"
-                                    onChange={handleSelectChange}
+                                    onChange={handleChange}
                                 >
-
                                 </Select>
                             </div>
                         </div>
@@ -128,7 +132,6 @@ export default function AddItem() {
                             <Select                                 
                                 options={selectedOption("Vendor")}
                                 placeholder="Select an option"
-                                onChange={handleSelectChange}
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -141,7 +144,6 @@ export default function AddItem() {
                             <Select                                 
                                 options={selectedOption("Brand")}
                                 placeholder="Select an option"
-                                onChange={handleSelectChange}
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -158,9 +160,9 @@ export default function AddItem() {
                     <Input placeholder="Enter here" />
                 </ComponentsCard>
             </div>
-            <button type="submit">
-                Submit
-            </button>
+            <Button type="submit">
+                Select
+            </Button>
         </form>
     );
 }
