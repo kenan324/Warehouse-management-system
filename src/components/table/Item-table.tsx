@@ -1,0 +1,147 @@
+import Image from "next/image";
+import {Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/Table/Table";
+import { Item } from "@/type/item-types";
+import { dummiesitems } from "@/type/dummy-items";
+import Button from "../ui/Button/Button";
+import { BinIcon, PlusIcon } from "@/icons";
+
+const columns = [
+    {
+        key: "name",
+        label: "Name"
+    },
+    {
+        key: "sku",
+        label: "SKU"
+    },
+    {
+        key: "unit",
+        label: "Unit"
+    },
+    {
+        key: "itemMasterStatus",
+        label: "Item Master Status"
+    },
+        
+    {
+        key: "upc",
+        label: "UPC"
+    },
+    {
+        key: "enm",
+        label: "ENM"
+    },
+    /*
+    {
+        key: "dimension",
+        label: "Dimension"
+    },
+    {
+        key: "Vendor",
+        label: "Vendor"
+    },
+        {
+        key: "Brand",
+        label: "Brand"
+    },
+        {
+        key: "Weight",
+        label: "Weight"
+    },
+    //*/
+]
+
+const item = dummiesitems;
+
+export default function ItemTable() {
+
+    const handleDelete = () => {};
+
+    const handleEdit= () => {};
+
+    return(
+        <div className="overflow-hidden rounded-x1 border border-gray-200">
+            <Table className="max-w-full overflow-x-auto">
+                <TableHeader className="border-b border-gray-10">
+                    <TableRow>
+                        {columns.map((columns) => (
+                            <TableCell isHeader key={columns.key}
+                            className="first:text-left border-b-2 border-gray-200 bg-gray-50 px-3 py-2.5 font-semibold text-gray"
+                            >
+                                {columns.label}
+                            </TableCell>
+                        ))}
+                        <TableCell isHeader className="first:text-left border-b-2 border-gray-200 bg-gray-50 px-3 py-2.5 font-semibold text-gray">
+                            Option
+                        </TableCell>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {item.map((item) => (
+                        <TableRow key={item.id}>
+                            <TableCell className="flex items-center border-b border-gray-100 px-3 py-2.5">
+                                <Image
+                                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+                                alt= "test Image"
+                                width={50}
+                                height={50}
+                                className="mr-4 rounded-1 border border-gray-200 bg-white object-contain"
+                                ></Image>
+                                <span>{item.name}</span>
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.sku}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.unit}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.itemMasterStatus}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.upc}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.enm}
+                            </TableCell>
+                            {/*
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.dimension}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.vendor}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.brand}
+                            </TableCell>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                {item.weight}
+                            </TableCell>
+                            */}
+                            <TableCell className="items-center border-b border-gray-100 px-3 py-2.5">
+                                <div className="flex items-center justify-center gap-2">
+                                   <Button 
+                                    className="flex h-8 w-8 items-center justify-center rounded-full! p-0"
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={handleEdit}
+                                    >
+                                        <BinIcon />
+                                    </Button>
+                                    <Button 
+                                    className="flex h-8 w-8 items-center justify-center rounded-full! p-0"
+                                    variant="outline"
+                                    onClick={handleEdit}
+                                    >
+                                        <PlusIcon />
+                                    </Button> 
+                                </div>
+                                
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
+}
