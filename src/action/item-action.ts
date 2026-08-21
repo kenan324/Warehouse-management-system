@@ -34,7 +34,7 @@ export async function submitActionFrom(
         }
 
         try {
-            //await itemService.create(parsed.data);
+            await itemService.create(parsed.data);
             return {
                 success: true,
             };
