@@ -79,15 +79,17 @@ export default function ItemTable() {
                 <TableBody>
                     {item.map((item) => (
                         <TableRow key={item.id}>
-                            <TableCell className="flex items-center border-b border-gray-100 px-3 py-2.5">
-                                <Image
-                                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-                                alt= "test Image"
-                                width={50}
-                                height={50}
-                                className="mr-4 rounded-1 border border-gray-200 bg-white object-contain"
-                                ></Image>
-                                <span>{item.name}</span>
+                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                                <div className="flex items-center">
+                                    <Image
+                                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+                                    alt= "test Image"
+                                    width={50}
+                                    height={50}
+                                    className="mr-4 rounded-1 border border-gray-200 bg-white object-contain"
+                                    ></Image>
+                                    <span>{item.name}</span>
+                                </div>
                             </TableCell>
                             <TableCell className="border-b border-gray-100 px-3 py-2.5">
                                 {item.sku}
