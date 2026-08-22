@@ -78,7 +78,7 @@ export default function ItemTable() {
                 </TableHeader>
                 <TableBody>
                     {item.map((item) => (
-                        <TableRow key={item.id}>
+                        <TableRow key={item.id} className="group hover:bg-gray-100">
                             <TableCell className="border-b border-gray-100 px-3 py-2.5">
                                 <div className="flex items-center">
                                     <Image
@@ -91,37 +91,37 @@ export default function ItemTable() {
                                     <span>{item.name}</span>
                                 </div>
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
                                 {item.sku}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
                                 {item.unit}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
                                 {item.itemMasterStatus}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
                                 {item.upc}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
                                 {item.enm}
                             </TableCell>
                             {/*
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10 border-b border-gray-100 px-3 py-2.5">
                                 {item.dimension}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10 border-b border-gray-100 px-3 py-2.5">
                                 {item.vendor}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10 border-b border-gray-100 px-3 py-2.5">
                                 {item.brand}
                             </TableCell>
-                            <TableCell className="border-b border-gray-100 px-3 py-2.5">
+                            <TableCell className="h-10 border-b border-gray-100 px-3 py-2.5">
                                 {item.weight}
                             </TableCell>
                             */}
-                            <TableCell className="items-center border-b border-gray-100 px-3 py-2.5">
-                                <div className="flex items-center justify-center gap-2">
+                            <TableCell className="h-10 w-30 items-center border-b border-gray-100 px-3 py-2.5">
+                                <div className=" hidden items-center justify-center gap-2 group-hover:flex">
                                    <Button 
                                     className="flex h-10 w-10 items-center justify-center rounded-full! p-0"
                                     size="sm"
