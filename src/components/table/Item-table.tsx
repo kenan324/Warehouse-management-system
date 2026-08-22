@@ -121,19 +121,19 @@ export default function ItemTable() {
                             <TableCell className="items-center border-b border-gray-100 px-3 py-2.5">
                                 <div className="flex items-center justify-center gap-2">
                                    <Button 
-                                    className="flex h-8 w-8 items-center justify-center rounded-full! p-0"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full! p-0"
                                     size="sm"
                                     variant="outline"
                                     onClick={handleEdit}
                                     >
-                                        <BinIcon />
+                                        <BinIcon className="w-full h-full object-contain"/>
                                     </Button>
                                     <Button 
-                                    className="flex h-8 w-8 items-center justify-center rounded-full! p-0"
+                                    className="flex  h-10 w-10 items-center justify-center rounded-full! p-0"
                                     variant="outline"
                                     onClick={handleEdit}
                                     >
-                                        <PlusIcon />
+                                        <PlusIcon  className="w-full h-full object-contain"/>
                                     </Button> 
                                 </div>
                                 
