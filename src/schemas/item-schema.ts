@@ -31,7 +31,7 @@ export type ActionResult = {
 }
 
 export const initialActionState: ActionResult = {
-    success: false,
+    success: true,
     error: "",
     fieldErrors: {},
 }

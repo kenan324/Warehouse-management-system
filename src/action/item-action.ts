@@ -40,16 +40,14 @@ export async function submitActionFrom(
 
         try {
             await itemService.create(parsed.data);
-            revalidatePath('/items');
-            return {
-                success: true,
-            };
         } catch (err){
             return{
                 success: false,
                 error: "Cannot create new item",
             } 
-        };
+        };      
+    revalidatePath('/items');
+    redirect('/stock-items')
 }
 export async function updateActionFrom(
     id: string,
