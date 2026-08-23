@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface Option {
@@ -35,6 +35,9 @@ const Select: React.FC<SelectProps> = ({
         setSelectedValue(value); // let the value be string for now
         onChange?.(e);
     }
+    useEffect(() => {
+        setSelectedValue(defaultValue);
+    }, [defaultValue]);
     return (
         <select
         id={id}
