@@ -70,13 +70,22 @@ export default function EditItem() {
     useEffect(() => {
         const loadItem = async () => {
             if(!id) {
-                router.back();
+                router.push('/stock-items');
                 throw Error("Search parameter ID is null");
             }
 
             const item = await itemService.getById(id);
 
             setItem(item);
+            // to do fix this 
+            // using a normal input value in input produces an uncontrolled input to be controlled error 
+            // value changing from undefined to defined value
+            setFrom({
+                name: item.name,
+                sku: item.sku,
+                unit: item.unit,
+                itemMasterStatus: item.itemMasterStatus,
+            })
         }
         loadItem();
 
