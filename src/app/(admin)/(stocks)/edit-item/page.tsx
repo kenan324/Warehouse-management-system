@@ -6,7 +6,6 @@ import ComponentsCard from "@/components/components-cards/ComponentCard";
 import Input from "@/components/form/input/InputField";
 import Select from "@/components/form/select/Select";
 import { useActionState, useEffect, useState } from "react";
-import { submitActionFrom } from "@/action/item-action";
 import { initialActionState } from "@/schemas/item-schema";
 import Button from "@/components/ui/Button/Button";
 import InputLabel from "@/components/components-cards/InputLabel";
@@ -16,6 +15,7 @@ import { Item } from "@/type/item-types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { string } from "zod";
 import { itemService } from "@/service/ItemService";
+import { updateActionFrom } from "@/action/item-action";
 
 const options: Option[]= [
     {
@@ -51,8 +51,11 @@ const options: Option[]= [
 ];
 
 export default function EditItem() {
+    const searchParams = useSearchParams();
+    const id = searchParams.get("id");
+    
     const [state, fromAction] = useActionState(
-        submitActionFrom,
+        updateActionFrom.bind(null,id ?? ""), // id the id does not exist make it "" and cath it in serve action
         initialActionState
     );
     const [item, setItem] = useState<Item>();
@@ -61,11 +64,10 @@ export default function EditItem() {
     const {
         form,
         fromValid,
+        setForm,
         handleChange,
     } = useItem();
 
-    const searchParams = useSearchParams();
-    const id = searchParams.get("id");
     useEffect(() => {
         const loadItem = async () => {
             if(!id) {
@@ -79,11 +81,11 @@ export default function EditItem() {
             // to do fix this 
             // using a normal input value in input produces an uncontrolled input to be controlled error 
             // value changing from undefined to defined value
-            setFrom({
-                name: item.name,
-                sku: item.sku,
-                unit: item.unit,
-                itemMasterStatus: item.itemMasterStatus,
+            setForm({
+                name: item.name ?? "",
+                sku: item.sku ?? "",
+                unit: item.unit ?? "",
+                itemMasterStatus: item.itemMasterStatus ?? "",
             })
         }
         loadItem();
@@ -95,12 +97,16 @@ export default function EditItem() {
     options.find((option) => option.name === name)?.subOptions ?? [];
 
     return (
-        <form>
+        <form action={fromAction}>
             <PageBreadcrumbNav pageTitle="Edit Item" path="inventory\edit-item"/>
             <div className="flex flex-col gap-6">
                 <ComponentsCard title="Information">
                     <div className="grid grid-cols-2 gap-6">
                         <div className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="id">Id</label>
+                                <span id="id">{item?.id}</span>
+                            </div>
                             <div className="flex flex-col gap-2">
                                 <InputLabel htmlFor="name" value={form.name}>
                                    Name
