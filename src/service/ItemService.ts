@@ -1,7 +1,7 @@
 import { CreateItemInput, Item } from "@/type/item-types";
 import { db } from "@/config/firebase"
 import { useCollection } from "react-firebase-hooks/firestore"
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { CreateItemSchemaType, UpdateItemSchemaType } from "@/schemas/item-schema";
 import { dummiesitems } from "@/type/dummy-items";
 
@@ -40,9 +40,9 @@ export const itemService = {
         }
     },
 
-    async update(data: UpdateItemSchemaType): Promise<void> {
+    async update(data: UpdateItemSchemaType, id: string): Promise<void> {
         try {
-            await addDoc(collection(db,COLLECTION), data);
+            await updateDoc(doc(db,COLLECTION, id), data);
         } catch (error) {
             throw error;
         }
