@@ -3,7 +3,9 @@
 import { createItemSchema, itemSchema } from "@/schemas/item-schema";
 import { itemService } from "@/service/ItemService";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { ActionResult } from "next/dist/shared/lib/app-router-types";
+
 
 
 
@@ -37,6 +39,7 @@ export async function submitActionFrom(
 
         try {
             await itemService.create(parsed.data);
+            revalidatePath('/items');
             return {
                 success: true,
             };
