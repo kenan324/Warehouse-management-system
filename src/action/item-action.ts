@@ -2,7 +2,9 @@
 
 import { createItemSchema, itemSchema } from "@/schemas/item-schema";
 import { itemService } from "@/service/ItemService";
+import { revalidatePath } from "next/cache";
 import { ActionResult } from "next/dist/shared/lib/app-router-types";
+
 
 
 
@@ -44,4 +46,20 @@ export async function submitActionFrom(
                 error: "Cannot create new item",
             } 
         };
+}
+
+export async function deleteItem(
+    id: string
+): Promise<ActionResult> {
+
+    try {
+        await itemService.delete(id);
+        revalidatePath('/items');    
+        return {success: true};
+    } catch (error) {
+        return{
+            success: false,
+            error: "Failed to delete item",
+        } 
+    };
 }

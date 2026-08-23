@@ -1,9 +1,11 @@
 import Image from "next/image";
 import {Table, TableBody, TableCell, TableHeader, TableRow } from "../ui/Table/Table";
 import { Item } from "@/type/item-types";
-import { dummiesitems } from "@/type/dummy-items";
 import Button from "../ui/Button/Button";
 import { BinIcon, PlusIcon } from "@/icons";
+import { useEffect, useState } from "react";
+import { deleteItem } from "@/action/item-action";
+import { itemService } from "@/service/ItemService";
 
 const columns = [
     {
@@ -51,14 +53,28 @@ const columns = [
     //*/
 ]
 
-const item = dummiesitems;
-
 export default function ItemTable() {
+    const [items, setItems] = useState<Item[]>([]);
 
-    const handleDelete = () => {};
+    const handleDelete = async (id: string) => {
+        const prevItems = items;
+
+        setItems(prev => prev.filter(item => item.id !== id));
+        const result = await deleteItem(id);
+        if(!result.success){
+           setItems(prevItems)
+        }
+    };
 
     const handleEdit= () => {};
 
+    useEffect(()=> {
+        const loadItems = async () => {
+            const items = await itemService.list();
+            setItems(items);
+        };
+        loadItems();
+    }, [])
     return(
         <div className="overflow-hidden rounded-x1 border border-gray-200">
             <Table className="max-w-full overflow-x-auto">
@@ -77,7 +93,7 @@ export default function ItemTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {item.map((item) => (
+                    {items.map((item) => (
                         <TableRow key={item.id} className="group hover:bg-gray-100">
                             <TableCell className="border-b border-gray-100 px-3 py-2.5">
                                 <div className="flex items-center">
@@ -126,7 +142,7 @@ export default function ItemTable() {
                                     className="flex h-10 w-10 items-center justify-center rounded-full! p-0"
                                     size="sm"
                                     variant="outline"
-                                    onClick={handleEdit}
+                                    onClick={()=> handleDelete(item.id)}
                                     >
                                         <BinIcon className="w-full h-full object-contain"/>
                                     </Button>
