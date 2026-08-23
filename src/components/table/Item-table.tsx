@@ -6,6 +6,7 @@ import { BinIcon, PlusIcon } from "@/icons";
 import { useEffect, useState } from "react";
 import { deleteItem } from "@/action/item-action";
 import { itemService } from "@/service/ItemService";
+import { useRouter } from "next/navigation";
 
 const columns = [
     {
@@ -55,7 +56,7 @@ const columns = [
 
 export default function ItemTable() {
     const [items, setItems] = useState<Item[]>([]);
-
+    const router = useRouter();
     const handleDelete = async (id: string) => {
         const prevItems = items;
 
@@ -66,7 +67,9 @@ export default function ItemTable() {
         }
     };
 
-    const handleEdit= () => {};
+    const handleEdit= (id: string) => {
+        router.push(`/edit-item?id=${id}`)
+    };
 
     useEffect(()=> {
         const loadItems = async () => {
@@ -149,7 +152,7 @@ export default function ItemTable() {
                                     <Button 
                                     className="flex  h-10 w-10 items-center justify-center rounded-full! p-0"
                                     variant="outline"
-                                    onClick={handleEdit}
+                                    onClick={()=> handleEdit(item.id)}
                                     >
                                         <PlusIcon  className="w-full h-full object-contain"/>
                                     </Button> 
