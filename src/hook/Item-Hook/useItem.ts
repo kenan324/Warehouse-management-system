@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export function useItem() {
     
-    const [form, setFrom] = useState({
+    const [form, setForm] = useState({
         name: "",
         sku: "",
         unit: "",
@@ -17,12 +17,12 @@ export function useItem() {
     function handleChange 
     <T extends { name: string; value:string } >
         (e: React.ChangeEvent<T>) {
-            setFrom(prev => ({...prev, [e.target.name]: e.target.value}))
+            setForm(prev => ({...prev, [e.target.name]: e.target.value}))
         }
 
     return {
         form,
-        setFrom,
+        setForm,
         handleChange,
         fromValid,
     }

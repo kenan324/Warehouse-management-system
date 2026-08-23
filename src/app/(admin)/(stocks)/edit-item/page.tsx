@@ -61,7 +61,6 @@ export default function EditItem() {
     const {
         form,
         fromValid,
-        setFrom,
         handleChange,
     } = useItem();
 

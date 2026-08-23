@@ -54,7 +54,6 @@ export default function AddItem() {
     const {
         form,
         fromValid,
-        setFrom,
         handleChange,
     } = useItem();
 
