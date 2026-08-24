@@ -6,11 +6,28 @@ import ItemTable from "@/components/table/Item-table";
 import Button from "@/components/ui/Button/Button";
 import { useRouter } from "next/navigation";
 import { PlusIcon } from "@/icons";
+import { useEffect, useState } from "react";
+import { itemService } from "@/service/ItemService";
+import { Item } from "@/type/item-types";
+import CreateItems from "@/components/other/create-Items/CreateItems";
 
 export default function Stock() {
     const router  = useRouter();
 
 
+    const [items, setItems] = useState<Item[]>([]);
+
+    const itemsExist = () => {
+        return items.length > 0 ;
+    };
+
+    useEffect(()=> {
+        const loadItems = async () => {
+            const items = await itemService.list();
+            setItems(items);
+        };
+        loadItems();
+    }, [])
     return (
         
         <div className="flex-1 p-6 space-y-2">
@@ -27,7 +44,12 @@ export default function Stock() {
                     Add Item
                 </Button>
             </div>
-            <ItemTable />
+            {itemsExist() ? 
+                (
+                <ItemTable tableItem={items}/>
+            ) : (
+                <CreateItems/>
+            )}
         </div>
     );
 }
