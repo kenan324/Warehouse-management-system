@@ -54,8 +54,9 @@ const columns = [
     //*/
 ]
 
-export default function ItemTable() {
-    const [items, setItems] = useState<Item[]>([]);
+export default function ItemTable({tableItem}: {tableItem : Item[]}) {
+
+    const [items, setItems] = useState<Item[]>(tableItem);
     const router = useRouter();
     const handleDelete = async (id: string) => {
         const prevItems = items;
@@ -72,12 +73,8 @@ export default function ItemTable() {
     };
 
     useEffect(()=> {
-        const loadItems = async () => {
-            const items = await itemService.list();
-            setItems(items);
-        };
-        loadItems();
-    }, [])
+       setItems(tableItem)
+    }, [tableItem])
     return(
         <div className="overflow-hidden rounded-x1 border border-gray-200">
             <Table className="max-w-full overflow-x-auto">
