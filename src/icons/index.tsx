@@ -10,7 +10,8 @@ import WarehouseIcon from "./noun-warehouse-7821041.svg"
 import ChevronDownIcon from "./noun-down-chevron-7734487.svg"
 import BinIcon from "./icons8-delete.svg"
 import PlusIcon from "./icons8-plus.svg"
-
+import Tshirt from "./t-shirt-svgrepo-com.svg"
+import MultipleTshirt from "./tshirt.png"
 export {
     EmployeeIcon,
     GridIcon,
@@ -24,5 +25,6 @@ export {
     ChevronDownIcon,
     PlusIcon,
     BinIcon,
-
+    Tshirt,
+    MultipleTshirt,
 }
