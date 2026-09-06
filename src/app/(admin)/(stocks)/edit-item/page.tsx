@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { string } from "zod";
 import { itemService } from "@/service/ItemService";
 import { updateActionFrom } from "@/action/item-action";
+import { getSelectedOption } from "@/utils/options/options";
 
 const options: Option[]= [
     {
@@ -92,9 +93,7 @@ export default function EditItem() {
 
 
     }, [id, router]);
-    //find the appropriate select box
-    const selectedOption = (name: string) =>
-    options.find((option) => option.name === name)?.subOptions ?? [];
+
 
     return (
         <form action={fromAction}>
@@ -131,7 +130,7 @@ export default function EditItem() {
                                 <Select  
                                     id="unit"
                                     name="unit"                               
-                                    options={selectedOption("Unit")}
+                                    options={getSelectedOption(options, "Unit")}
                                     placeholder="Select an option"
                                     onChange={handleChange}
                                     defaultValue={item?.unit}
@@ -147,7 +146,7 @@ export default function EditItem() {
                                  <Select    
                                     id="itemMasterStatus"
                                     name="itemMasterStatus"                              
-                                    options={selectedOption("ItemMasterStatus")}
+                                    options={getSelectedOption(options, "ItemMasterStatus")}
                                     placeholder="Select an option"
                                     defaultValue={item?.itemMasterStatus}
                                     onChange={handleChange}
@@ -178,7 +177,7 @@ export default function EditItem() {
                             <Select
                                 id="vendor"
                                 name="vendor"                                 
-                                options={selectedOption("Vendor")}
+                                options={getSelectedOption(options, "Vendor")}
                                 placeholder="Select an option"
                                 defaultValue={item?.vendor}
                                 onChange={handleChange}
@@ -200,7 +199,7 @@ export default function EditItem() {
                             <Select
                                 id="brand"
                                 name="brand"                                 
-                                options={selectedOption("Brand")}
+                                options={getSelectedOption(options, "Brand")}
                                 placeholder="Select an option"
                                 defaultValue={item?.brand}
                                 onChange={handleChange}

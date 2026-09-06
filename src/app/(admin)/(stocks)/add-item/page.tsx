@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button/Button";
 import InputLabel from "@/components/components-cards/InputLabel";
 import { Option } from "@/type/option-type";
 import { useItem } from "@/hook/Item-Hook/useItem";
+import { getSelectedOption } from "@/utils/options/options";
 
 const options: Option[]= [
     {
@@ -57,9 +58,6 @@ export default function AddItem() {
         handleChange,
     } = useItem();
 
-    //find the appropriate select box
-    const selectedOption = (name: string) =>
-    options.find((option) => option.name === name)?.subOptions ?? [];
 
     return (
         <form action={fromAction}>
@@ -92,7 +90,7 @@ export default function AddItem() {
                                 <Select  
                                     id="unit"
                                     name="unit"                               
-                                    options={selectedOption("Unit")}
+                                    options={getSelectedOption(options, "Unit")}
                                     placeholder="Select an option"
                                     onChange={handleChange}
                                     required
@@ -107,7 +105,7 @@ export default function AddItem() {
                                  <Select    
                                     id="itemMasterStatus"
                                     name="itemMasterStatus"                              
-                                    options={selectedOption("ItemMasterStatus")}
+                                    options={getSelectedOption(options, "ItemMasterStatus")}
                                     placeholder="Select an option"
                                     onChange={handleChange}
                                 >
@@ -137,7 +135,7 @@ export default function AddItem() {
                             <Select
                                 id="vendor"
                                 name="vendor"                                 
-                                options={selectedOption("Vendor")}
+                                options={getSelectedOption(options, "Vendor")}
                                 placeholder="Select an option"
                                 onChange={handleChange}
                             ></Select>
@@ -158,7 +156,7 @@ export default function AddItem() {
                             <Select
                                 id="brand"
                                 name="brand"                                 
-                                options={selectedOption("Brand")}
+                                options={getSelectedOption(options, "Brand")}
                                 placeholder="Select an option"
                                 onChange={handleChange}
                             ></Select>
