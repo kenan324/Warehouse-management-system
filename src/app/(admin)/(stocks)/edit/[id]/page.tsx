@@ -17,6 +17,6 @@ export default async function EditItem({
     
     const item = await itemService.getById(id);
     return (
-       <EditFrom item={item}/>
+       <EditFrom id={ id } item={ item }/>
     );
 }

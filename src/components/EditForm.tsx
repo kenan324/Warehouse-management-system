@@ -51,8 +51,12 @@ const options: Option[]= [
     },
 ];
 
-export default function EditFrom({ item }: {item: Item}) {
+export default function EditFrom({ id, item }: { id: string; item: Item; }) {
 
+    const [state, formAction] = useActionState(
+        updateActionFrom.bind(null, id),
+        initialActionState
+    );
     
     const {
         form,
@@ -72,7 +76,7 @@ export default function EditFrom({ item }: {item: Item}) {
 
 
     return (
-        <form>
+        <form action={formAction}>
             <PageBreadcrumbNav pageTitle="Edit Item" path="inventory\edit-item"/>
             <div className="flex flex-col gap-6">
                 <ComponentsCard title="Information">

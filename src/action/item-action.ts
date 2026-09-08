@@ -66,15 +66,9 @@ export async function updateActionFrom(
             brand: formData.get('brand') as string,
             weight: formData.get('weight') as string,
         }
+        
+        const parsed = updateItemSchema.safeParse(data);
 
-        const parsed = updateItemSchema.safeParse(data)
-
-        if (!id){
-            return {
-                success: false,
-                error: "Id does not exist"
-            }
-        }
         if(!parsed.success){
             return {
                 success: false,
