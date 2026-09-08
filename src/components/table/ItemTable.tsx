@@ -142,14 +142,14 @@ export default function ItemTable({tableItem}: {tableItem : Item[]}) {
                                     className="flex h-10 w-10 items-center justify-center rounded-full! p-0"
                                     size="sm"
                                     variant="outline"
-                                    onClick={()=> handleDelete(item.id)}
+                                    onClick={()=> handleDelete(item.id!)}
                                     >
                                         <BinIcon className="w-full h-full object-contain"/>
                                     </Button>
                                     <Button 
                                     className="flex  h-10 w-10 items-center justify-center rounded-full! p-0"
                                     variant="outline"
-                                    onClick={()=> handleEdit(item.id)}
+                                    onClick={()=> handleEdit(item.id!)}
                                     >
                                         <PlusIcon  className="w-full h-full object-contain"/>
                                     </Button> 
