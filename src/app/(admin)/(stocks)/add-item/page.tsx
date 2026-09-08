@@ -4,7 +4,7 @@ import GalleryCard from "@/components/components-cards/GalleryCard";
 import ComponentsCard from "@/components/components-cards/ComponentCard";
 import Input from "@/components/form/input/InputField";
 import Select from "@/components/form/select/Select";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { submitActionFrom } from "@/action/item-action";
 import { initialActionState } from "@/schemas/item-schema";
 import Button from "@/components/ui/Button/Button";
@@ -55,9 +55,18 @@ export default function AddItem() {
     const {
         form,
         fromValid,
+        setForm,
         handleChange,
     } = useItem();
 
+    useEffect(() => {
+            setForm({
+            name: "",
+            sku: "",
+            unit: "",
+            itemMasterStatus: "",
+        })
+    }, [setForm]);
 
     return (
         <form action={fromAction}>
@@ -188,4 +197,8 @@ export default function AddItem() {
             </Button>
         </form>
     );
+}
+
+function setForm(arg0: { name: string; sku: string; unit: string; itemMasterStatus: string; }) {
+    throw new Error("Function not implemented.");
 }
