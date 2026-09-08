@@ -1,15 +1,15 @@
 export interface Item {
-    id: string;
-    name: string;
-    sku: string;
-    unit: string;
-    itemMasterStatus: string 
-    upc: string,
-    enm: string,
-    dimension: string,
-    vendor: string,
-    brand: string,
-    weight: string,
+    id?: string;
+    name?: string;
+    sku?: string;
+    unit?: string;
+    itemMasterStatus?: string 
+    upc?: string,
+    enm?: string,
+    dimension?: string,
+    vendor?: string,
+    brand?: string,
+    weight?: string,
 }
 
 export type CreateItemInput = Omit<Item, 'id'>;
