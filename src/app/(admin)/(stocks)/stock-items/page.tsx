@@ -2,7 +2,7 @@
 
 import PageBreadcrumbNav from "@/components/components-cards/PageBreadcrumbNav";
 import Searchbar from "@/components/ui/Searchbar/Searchbar";
-import ItemTable from "@/components/table/Item-table";
+import ItemTable from "@/components/table/ItemTable";
 import Button from "@/components/ui/Button/Button";
 import { useRouter } from "next/navigation";
 import { PlusIcon } from "@/icons";
