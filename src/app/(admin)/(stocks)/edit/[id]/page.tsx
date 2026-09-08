@@ -1,4 +1,4 @@
-import EditFrom from "@/components/EditForm";
+import EditFrom from "@/components/form/form/EditItemForm";
 import { itemService } from "@/service/ItemService";
 import { redirect } from "next/navigation";
 
