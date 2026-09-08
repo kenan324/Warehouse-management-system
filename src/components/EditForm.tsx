@@ -51,17 +51,9 @@ const options: Option[]= [
     },
 ];
 
-export default function EditItem() {
-    const searchParams = useSearchParams();
-    const id = searchParams.get("id");
-    
-    const [state, fromAction] = useActionState(
-        updateActionFrom.bind(null,id ?? ""), // id the id does not exist make it "" and cath it in serve action
-        initialActionState
-    );
-    const [item, setItem] = useState<Item>();
-    const router = useRouter();
+export default function EditFrom({ item }: {item: Item}) {
 
+    
     const {
         form,
         fromValid,
@@ -70,33 +62,17 @@ export default function EditItem() {
     } = useItem();
 
     useEffect(() => {
-        const loadItem = async () => {
-            if(!id) {
-                router.push('/stock-items');
-                throw Error("Search parameter ID is null");
-            }
-
-            const item = await itemService.getById(id);
-
-            setItem(item);
-            // to do fix this 
-            // using a normal input value in input produces an uncontrolled input to be controlled error 
-            // value changing from undefined to defined value
             setForm({
-                name: item.name ?? "",
-                sku: item.sku ?? "",
-                unit: item.unit ?? "",
-                itemMasterStatus: item.itemMasterStatus ?? "",
-            })
-        }
-        loadItem();
-
-
-    }, [id, router]);
+            name: item.name ?? "",
+            sku: item.sku ?? "",
+            unit: item.unit ?? "",
+            itemMasterStatus: item.itemMasterStatus ?? "",
+        })
+    }, [item, setForm]);
 
 
     return (
-        <form action={fromAction}>
+        <form>
             <PageBreadcrumbNav pageTitle="Edit Item" path="inventory\edit-item"/>
             <div className="flex flex-col gap-6">
                 <ComponentsCard title="Information">

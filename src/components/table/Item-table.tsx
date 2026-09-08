@@ -69,7 +69,7 @@ export default function ItemTable({tableItem}: {tableItem : Item[]}) {
     };
 
     const handleEdit= (id: string) => {
-        router.push(`/edit-item?id=${id}`)
+        router.push(`/edit/${id}`)
     };
 
     useEffect(()=> {
