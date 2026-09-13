@@ -69,7 +69,6 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
             setForm({
             name: item.name ?? "",
             sku: item.sku ?? "",
-            unit: item.unit ?? "",
             itemMasterStatus: item.itemMasterStatus ?? "",
         })
     }, [item, setForm]);

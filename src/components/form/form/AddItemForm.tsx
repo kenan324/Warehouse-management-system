@@ -59,14 +59,6 @@ export default function AddItemFrom() {
         handleChange,
     } = useItem();
 
-    useEffect(() => {
-            setForm({
-            name: "",
-            sku: "",
-            unit: "",
-            itemMasterStatus: "",
-        })
-    }, [setForm]);
 
     return (
         <form action={fromAction}>
