@@ -6,8 +6,14 @@ import { useState } from "react";
 
 export function useItem() {
     
-    // form will at the start be undefined until you add value in form 
-    const [form, setForm] = useState<Item>({});
+    // the user has to fill mandatory values before the form is valid
+    type ItemFrom = Omit<Item, 'id'>;
+
+    const [form, setForm] = useState<ItemFrom>({
+        name: "",
+        sku: "",
+        itemMasterStatus: "",
+    });
 
     const fromValid = Object.values(form)
     .filter(value => value !== undefined)

@@ -1,9 +1,9 @@
 export interface Item {
-    id?: string;
-    name?: string;
-    sku?: string;
+    id: string;
+    name: string;
+    sku: string;
     unit?: string;
-    itemMasterStatus?: string 
+    itemMasterStatus: string 
     upc?: string,
     enm?: string,
     dimension?: string,
