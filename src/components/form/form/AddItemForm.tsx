@@ -124,7 +124,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="upc">
                                 UPC
                             </InputLabel>
-                            <Input id="upc" name="upc" placeholder="Enter here" min="1" max="20" required
+                            <Input id="upc" name="upc" placeholder="Enter here" 
                             onChange={handleChange}
                             />
                         </div>
@@ -145,7 +145,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="enm">
                                 ENM
                             </InputLabel>
-                            <Input id="enm" name="enm" placeholder="Enter here" min="1" max="20" required
+                            <Input id="enm" name="enm" placeholder="Enter here" 
                             onChange={handleChange}
                             />
                         </div>
@@ -166,7 +166,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="dimension" >
                                 Dimension
                             </InputLabel>
-                            <Input id="dimension" name="dimension" placeholder="Enter here" min="1" max="20" required
+                            <Input id="dimension" name="dimension" placeholder="Enter here" 
                             onChange={handleChange}
                             />
                         </div>
@@ -174,7 +174,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="weight" >
                                 Weight
                             </InputLabel>
-                            <Input id="weight" name="weight" placeholder="Enter here" min="1" max="20" required
+                            <Input id="weight" name="weight" placeholder="Enter here"
                             onChange={handleChange}
                             />
                         </div>
