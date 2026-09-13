@@ -85,7 +85,7 @@ export default function AddItemFrom() {
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2">
-                                <InputLabel htmlFor="unit" value={form.unit}>
+                                <InputLabel htmlFor="unit">
                                     Unit
                                 </InputLabel>
                                 <Select  
