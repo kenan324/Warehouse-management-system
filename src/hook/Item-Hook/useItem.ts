@@ -3,6 +3,7 @@
 
 import { Item } from "@/type/item-types";
 import { useState } from "react";
+import { string } from "zod";
 
 export function useItem() {
     
@@ -12,11 +13,12 @@ export function useItem() {
     const [form, setForm] = useState<ItemFrom>({
         name: "",
         sku: "",
+        unit: "",
         itemMasterStatus: "",
     });
 
     const fromValid = Object.values(form)
-    .filter(value => value !== undefined)
+    .filter(value => typeof value === "string")
     // string for now 
     .every(value => value.trim().length > 0);
 

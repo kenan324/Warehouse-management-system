@@ -85,7 +85,7 @@ export default function AddItemFrom() {
                             </div>
                             {/* dropdown*/}
                             <div className="flex flex-col gap-2">
-                                <InputLabel htmlFor="unit">
+                                <InputLabel htmlFor="unit" value={form.unit}>
                                     Unit
                                 </InputLabel>
                                 <Select  
@@ -124,7 +124,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="upc">
                                 UPC
                             </InputLabel>
-                            <Input id="upc" name="upc" placeholder="Enter here" 
+                            <Input id="upc" name="upc" placeholder="Enter here" max="12"
                             onChange={handleChange}
                             />
                         </div>
@@ -142,10 +142,10 @@ export default function AddItemFrom() {
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <InputLabel htmlFor="enm">
-                                ENM
+                            <InputLabel htmlFor="ean">
+                                EAN
                             </InputLabel>
-                            <Input id="enm" name="enm" placeholder="Enter here" 
+                            <Input id="ean" name="ean" placeholder="Enter here" min="8" max="13"
                             onChange={handleChange}
                             />
                         </div>
@@ -166,7 +166,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="dimension" >
                                 Dimension
                             </InputLabel>
-                            <Input id="dimension" name="dimension" placeholder="Enter here" 
+                            <Input id="dimension" name="dimension" placeholder="Enter here" max="20" 
                             onChange={handleChange}
                             />
                         </div>
@@ -174,7 +174,7 @@ export default function AddItemFrom() {
                             <InputLabel htmlFor="weight" >
                                 Weight
                             </InputLabel>
-                            <Input id="weight" name="weight" placeholder="Enter here"
+                            <Input id="weight" name="weight" placeholder="Enter here" max="20"
                             onChange={handleChange}
                             />
                         </div>
