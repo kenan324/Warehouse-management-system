@@ -2,18 +2,29 @@ import { z } from "zod"
 
 
 export const itemSchema = z.object({
-    id: z.number(),
-    name: z.string(),
-    sku: z.string(),
-    unit: z.string(),
-    itemMasterStatus: z.string(),
-    upc: z.string(),
-    enm: z.string(),
-    dimension: z.string(),
-    vendor: z.string(),
-    brand: z.string(),
-    weight: z.string(),
-}); // for now the data will not be structured  
+    id: z.string(),
+    name: z.string().min(1).max(50),
+    sku: z.string().min(1).max(50),
+    unit: z.string().min(1).max(50),
+    itemMasterStatus: z.string().min(1).max(50),
+    
+    code: z.object({
+        // have to use sting because z does not recognize 
+        // the fist digit as 0 and filters it out of var 
+        upc: z.string().regex(/^\d{12}%/).optional(),
+        ean: z.string().regex(/^(?:\d{13}|\d{8}%)/).optional(),
+    }).optional(),
+
+    productInfo: z.object({
+        vendor: z.string().max(50).optional(),
+        brand: z.string().max(50).optional(),
+    }).optional(),
+
+    physicalInfo: z.object({
+        dimension: z.string().max(20).optional(),
+        weight: z.string().max(20).optional(),
+    }).optional(),
+});
 
 export const createItemSchema = itemSchema.omit({ id:true});
 export const updateItemSchema = createItemSchema.partial();
