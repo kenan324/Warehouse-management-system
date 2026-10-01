@@ -11,8 +11,8 @@ export const itemSchema = z.object({
     code: z.object({
         // have to use sting because z does not recognize 
         // the fist digit as 0 and filters it out of var 
-        upc: z.string().regex(/^\d{12}%/).optional(),
-        ean: z.string().regex(/^(?:\d{13}|\d{8}%)/).optional(),
+        upc: z.string().regex(/^\d{12}$/).optional(),
+        ean: z.string().regex(/^(?:\d{13}|\d{8})$/).optional(),
     }).optional(),
 
     productInfo: z.object({
