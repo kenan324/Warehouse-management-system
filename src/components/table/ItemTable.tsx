@@ -5,7 +5,6 @@ import Button from "../ui/Button/Button";
 import { BinIcon, PlusIcon } from "@/icons";
 import { useEffect, useState } from "react";
 import { deleteItem } from "@/action/item-action";
-import { itemService } from "@/service/ItemService";
 import { useRouter } from "next/navigation";
 
 const columns = [
@@ -117,10 +116,10 @@ export default function ItemTable({tableItem}: {tableItem : Item[]}) {
                                 {item.itemMasterStatus}
                             </TableCell>
                             <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
-                                {item.upc}
+                                {item.code?.upc}
                             </TableCell>
                             <TableCell className="h-10  border-b border-gray-100 px-3 py-2.5">
-                                {item.enm}
+                                {item.code?.ean}
                             </TableCell>
                             {/*
                             <TableCell className="h-10 border-b border-gray-100 px-3 py-2.5">

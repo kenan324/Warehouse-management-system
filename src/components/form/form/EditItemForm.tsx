@@ -12,9 +12,6 @@ import InputLabel from "@/components/components-cards/InputLabel";
 import { Option } from "@/type/option-type";
 import { useItem } from "@/hook/Item-Hook/useItem";
 import { Item } from "@/type/item-types";
-import { useRouter, useSearchParams } from "next/navigation";
-import { string } from "zod";
-import { itemService } from "@/service/ItemService";
 import { updateActionFrom } from "@/action/item-action";
 import { getSelectedOption } from "@/utils/options/options";
 
@@ -69,6 +66,7 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
             setForm({
             name: item.name ?? "",
             sku: item.sku ?? "",
+            unit: item.unit ?? "",
             itemMasterStatus: item.itemMasterStatus ?? "",
         })
     }, [item, setForm]);
@@ -144,7 +142,7 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                             <InputLabel htmlFor="upc">
                                 UPC
                             </InputLabel>
-                            <Input id="upc" name="upc" defaultValue={item?.upc} placeholder="Enter here" min="1" max="20" required
+                            <Input id="upc" name="upc" defaultValue={item?.code?.upc} placeholder="Enter here" min="1" max="20" required
                             onChange={handleChange}
                             />
                         </div>
@@ -158,15 +156,15 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                                 name="vendor"                                 
                                 options={getSelectedOption(options, "Vendor")}
                                 placeholder="Select an option"
-                                defaultValue={item?.vendor}
+                                defaultValue={item?.productInfo?.vendor}
                                 onChange={handleChange}
                             ></Select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <InputLabel htmlFor="enm">
-                                ENM
+                            <InputLabel htmlFor="ean">
+                                EAN
                             </InputLabel>
-                            <Input id="enm" name="enm" defaultValue={item?.enm} placeholder="Enter here" min="1" max="20" required
+                            <Input id="ean" name="ean" defaultValue={item?.code?.ean} placeholder="Enter here" min="1" max="20" required
                             onChange={handleChange}
                             />
                         </div>
@@ -180,7 +178,7 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                                 name="brand"                                 
                                 options={getSelectedOption(options, "Brand")}
                                 placeholder="Select an option"
-                                defaultValue={item?.brand}
+                                defaultValue={item?.productInfo?.vendor}
                                 onChange={handleChange}
                             ></Select>
                         </div>
@@ -188,7 +186,7 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                             <InputLabel htmlFor="dimension" >
                                 Dimension
                             </InputLabel>
-                            <Input id="dimension" name="dimension" defaultValue={item?.dimension} placeholder="Enter here" min="1" max="20" required
+                            <Input id="dimension" name="dimension" defaultValue={item?.physicalInfo?.dimension} placeholder="Enter here" min="1" max="20" required
                             onChange={handleChange}
                             />
                         </div>
@@ -196,7 +194,7 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                             <InputLabel htmlFor="weight" >
                                 Weight
                             </InputLabel>
-                            <Input id="weight" name="weight" defaultValue={item?.weight} placeholder="Enter here" min="1" max="20" required
+                            <Input id="weight" name="weight" defaultValue={item?.physicalInfo?.weight} placeholder="Enter here" min="1" max="20" required
                             onChange={handleChange}
                             />
                         </div>
