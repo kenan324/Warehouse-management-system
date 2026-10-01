@@ -41,12 +41,9 @@ function filterUndefinedValues<T extends Record<string, any>>(
     ) as Partial<T>
 }
 
-export async function submitActionFrom(
-    previousState: ActionResult,
-    formData: FormData, 
-): Promise<ActionResult> {
-    
-        const data = filterUndefinedValues({
+function getFormData (formData: FormData) {
+        return filterUndefinedValues({
+
             name: formData.get('name') as string,
             sku: formData.get('sku') as string,
             unit: formData.get('unit') as string,
@@ -65,66 +62,65 @@ export async function submitActionFrom(
                 dimension: trim(formData.get('dimension') as string),
                 weight: trim(formData.get('weight') as string),
             },
-        });
+    });
+}
 
-        const parsed = createItemSchema.safeParse(data);
 
-        if(!parsed.success){
-            return {
-                success: false,
-                error: "Input invalid",
-                fieldErrors: parsed.error.flatten().fieldErrors,
-            }
+
+export async function submitActionFrom(
+    previousState: ActionResult,
+    formData: FormData, 
+): Promise<ActionResult> {
+    
+    const data = getFormData(formData);
+
+    const parsed = createItemSchema.safeParse(data);
+    if(!parsed.success){
+        return {
+            success: false,
+            error: "Input invalid",
+            fieldErrors: parsed.error.flatten().fieldErrors,
         }
+    }
 
-        try {
-            await itemService.create(parsed.data);
-        } catch (err){
-            return{
-                success: false,
-                error: "Cannot create new item",
-            } 
-        };      
+    try {
+        await itemService.create(parsed.data);
+    } catch (err){
+        return{
+            success: false,
+            error: "Cannot create new item",
+        } 
+    };      
     revalidatePath('/items');
-    redirect('/stock-items')
+    redirect('/stock')
 }
 export async function updateActionFrom(
     id: string,
     previousState: ActionResult,
     formData: FormData, 
 ): Promise<ActionResult> {
-        const data = {
-            name: formData.get('name') as string,
-            sku: formData.get('sku') as string,
-            unit: formData.get('unit') as string,
-            itemMasterStatus: formData.get('itemMasterStatus') as string,
-            upc: formData.get('upc') as string,
-            enm: formData.get('enm') as string,
-            dimension: formData.get('dimension') as string,
-            vendor: formData.get('vendor') as string,
-            brand: formData.get('brand') as string,
-            weight: formData.get('weight') as string,
-        }
         
-        const parsed = updateItemSchema.safeParse(data);
-
-        if(!parsed.success){
-            return {
-                success: false,
-                error: "Input invalid",
-                fieldErrors: parsed.error.flatten().fieldErrors,
-            }
+    const data = getFormData(formData);
+    
+    const parsed = updateItemSchema.safeParse(data);
+    
+    if(!parsed.success){
+        return {
+            success: false,
+            error: "Input invalid",
+            fieldErrors: parsed.error.flatten().fieldErrors,
         }
-        try {
-            await itemService.update(parsed.data , id);
-        } catch (err){
-            return{
-                success: false,
-                error: "Cannot update item",
-            } 
-        };
+    }
+    try {
+        await itemService.update(parsed.data , id);
+    } catch (err){
+        return{
+            success: false,
+            error: "Cannot update item",
+        } 
+    };
     revalidatePath('/items');
-    redirect('/stock-items');
+    redirect('/stock');
 }
 
 export async function deleteItem(
