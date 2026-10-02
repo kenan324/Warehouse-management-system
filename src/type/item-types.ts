@@ -12,6 +12,7 @@ export interface Item {
     productInfo?: {
         vendor?: string | undefined,
         brand?: string | undefined,
+        description?: string | undefined,
     },
     physicalInfo?: {
         dimension?: string | undefined,
