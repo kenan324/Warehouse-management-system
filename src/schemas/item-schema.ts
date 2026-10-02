@@ -18,6 +18,7 @@ export const itemSchema = z.object({
     productInfo: z.object({
         vendor: z.string().max(50).optional(),
         brand: z.string().max(50).optional(),
+        description: z.string().max(300).optional(),
     }).optional(),
 
     physicalInfo: z.object({

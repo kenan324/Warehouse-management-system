@@ -56,6 +56,7 @@ function getFormData (formData: FormData) {
             productInfo: {
                 vendor: trim(formData.get('vendor') as string),
                 brand: trim(formData.get('brand') as string),
+                description: trim(formData.get('description') as string)
             },
             
             physicalInfo: {
