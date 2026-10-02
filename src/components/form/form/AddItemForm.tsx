@@ -12,6 +12,7 @@ import InputLabel from "@/components/components-cards/InputLabel";
 import { Option } from "@/type/option-type";
 import { useItem } from "@/hook/Item-Hook/useItem";
 import { getSelectedOption } from "@/utils/options/options";
+import Textarea from "../textarea/Textarea"; 
 
 const options: Option[]= [
     {
@@ -181,7 +182,14 @@ export default function AddItemFrom() {
                     </div>
                 </ComponentsCard>
                 <ComponentsCard title="Description">
-                    <Input placeholder="Enter here" />
+                    <Textarea 
+                        id="description" 
+                        name="description"
+                        rows={5}
+                        maxLength={300}
+                        placeholder="Type here"
+                    >
+                    </Textarea>
                 </ComponentsCard>
             </div>
             <Button type="submit" disabled={!fromValid}>
