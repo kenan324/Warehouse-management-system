@@ -14,6 +14,7 @@ import { useItem } from "@/hook/Item-Hook/useItem";
 import { Item } from "@/type/item-types";
 import { updateActionFrom } from "@/action/item-action";
 import { getSelectedOption } from "@/utils/options/options";
+import Textarea from "../textarea/Textarea";
 
 const options: Option[]= [
     {
@@ -201,7 +202,16 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                     </div>
                 </ComponentsCard>
                 <ComponentsCard title="Description">
-                    <Input placeholder="Enter here" />
+                    <Textarea 
+                        id="description" 
+                        name="description"
+                        rows={5}
+                        maxLength={300}
+                        placeholder="Type here"
+                        value={item?.productInfo?.description}
+                        disabled
+                    >
+                    </Textarea>
                 </ComponentsCard>
             </div>
             <Button type="submit" disabled={!fromValid}>

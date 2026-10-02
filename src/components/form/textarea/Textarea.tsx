@@ -1,29 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface TextareaProps {
     id?: string;
     name?: string;
     className?: string;
+    value?: string;
     onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     maxLength?: number;
     rows?: number;
     placeholder?: string
-    required?: boolean; 
+    required?: boolean;
+    disabled?: boolean; 
 }
 
 const Textarea: React.FC<TextareaProps> = ({
     id,
     name,
     className,
+    value = "",
     onChange,
     maxLength,
     rows,
     placeholder,
-    required
+    required,
+    disabled,
 }) => {
 
-    const [text, setText] = useState("");
+    const [text, setText] = useState(value);
 
     const currentLength = text.length;
 
@@ -44,6 +48,7 @@ const Textarea: React.FC<TextareaProps> = ({
                     `, className)}
 
                     onChange={(e) => setText(e.target.value)}
+                    disabled={disabled}
                 />
             </div>
             <label 
