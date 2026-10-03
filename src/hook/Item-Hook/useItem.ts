@@ -3,7 +3,6 @@
 
 import { Item } from "@/type/item-types";
 import { useState } from "react";
-import { string } from "zod";
 
 export function useItem() {
     
@@ -17,6 +16,8 @@ export function useItem() {
         itemMasterStatus: "",
     });
 
+    const [editTextarea, setEditTextarea] = useState(true)
+
     const fromValid = Object.values(form)
     .filter(value => typeof value === "string")
     // string for now 
@@ -29,10 +30,17 @@ export function useItem() {
             setForm(prev => ({...prev, [e.target.name]: e.target.value}))
         }
 
+
+    const handleEditTextarea = () => {
+        setEditTextarea((prev) => !prev);
+        
+    }    
     return {
         form,
         setForm,
         handleChange,
         fromValid,
+        handleEditTextarea,
+        editTextarea,
     }
 }

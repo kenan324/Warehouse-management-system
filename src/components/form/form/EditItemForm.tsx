@@ -61,6 +61,8 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
         fromValid,
         setForm,
         handleChange,
+        editTextarea,
+        handleEditTextarea,
     } = useItem();
 
     useEffect(() => {
@@ -209,9 +211,17 @@ export default function EditFrom({ id, item }: { id: string; item: Item; }) {
                         maxLength={300}
                         placeholder="Type here"
                         value={item?.productInfo?.description}
-                        disabled
+                        disabled={!editTextarea}
                     >
                     </Textarea>
+                    <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex w-15 h-10 self-start"
+                        onClick={handleEditTextarea}
+                            > 
+                            {editTextarea ? "Save" : "Edit" }
+                    </Button>
                 </ComponentsCard>
             </div>
             <Button type="submit" disabled={!fromValid}>

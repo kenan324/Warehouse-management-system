@@ -43,9 +43,12 @@ const Textarea: React.FC<TextareaProps> = ({
                     placeholder={placeholder}
                     required={required}
                     className={
-                    twMerge(`
+                    twMerge(` resize-none
                     flex w-full border rounded-lg px-3 py-2 border-transparent outline-none bg-[#f3f3f3] transition-all duration-500 hover:border-[#4a9dec] focus:border-[#4a9dec] focus:shadow-[0_0_0_7px_rgb(74_157_236/20%)] focus:bg-white
-                    `, className)}
+                    ${ 
+                        disabled === true ? "resize-none" : "resize" 
+                    }`, 
+                    className )}
 
                     onChange={(e) => setText(e.target.value)}
                     disabled={disabled}
