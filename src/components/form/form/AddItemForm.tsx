@@ -13,6 +13,7 @@ import { Option } from "@/type/option-type";
 import { useItem } from "@/hook/Item-Hook/useItem";
 import { getSelectedOption } from "@/utils/options/options";
 import Textarea from "../textarea/Textarea"; 
+import Dropzone from "@/components/ui/Dropzone/Dropzone";
 
 const options: Option[]= [
     {
@@ -58,8 +59,9 @@ export default function AddItemFrom() {
         fromValid,
         setForm,
         handleChange,
+        setImageFile,
+        imageFile,
     } = useItem();
-
 
     return (
         <form action={fromAction}>
@@ -117,7 +119,8 @@ export default function AddItemFrom() {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col items-center">
                                 <ComponentsCard title="Picture" className="m-0 w-130 h-auto">
-                                    <GalleryCard />
+                                    <Dropzone Files={setImageFile}/>
+                                    <GalleryCard files={imageFile}/>
                                 </ComponentsCard>
                             </div>
                         </div>

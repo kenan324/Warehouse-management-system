@@ -18,6 +18,8 @@ export function useItem() {
 
     const [editTextarea, setEditTextarea] = useState(true)
 
+    const[imageFile, setImageFile] = useState<File[]>([])
+
     const fromValid = Object.values(form)
     .filter(value => typeof value === "string")
     // string for now 
@@ -34,7 +36,7 @@ export function useItem() {
     const handleEditTextarea = () => {
         setEditTextarea((prev) => !prev);
         
-    }    
+    }
     return {
         form,
         setForm,
@@ -42,5 +44,7 @@ export function useItem() {
         fromValid,
         handleEditTextarea,
         editTextarea,
+        imageFile,
+        setImageFile,
     }
 }
