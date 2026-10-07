@@ -7,15 +7,21 @@ import { twMerge } from "tailwind-merge";
 interface DropzoneProps {
     className?: string;
     Files: React.Dispatch<React.SetStateAction<File[]>> // change const name
+    maxSize: number;
+    maxFiles: number;
 }
 
 
 const Dropzone:React.FC<DropzoneProps> = ({
     className,
-    Files
+    Files,
+    maxFiles,
+    maxSize,
 }) => {
 
     const [files, setFiles] = useState<File[]>([])
+
+    const dataFormat = 1000000; //MB
 
     const onDrop = useCallback( (acceptedFiles: File[]) => {
         if (acceptedFiles.length) {
@@ -34,7 +40,14 @@ const Dropzone:React.FC<DropzoneProps> = ({
         getRootProps,
         getInputProps,
         isDragActive
-    } = useDropzone({onDrop});
+    } = useDropzone({
+        onDrop,
+        accept: {
+            "image/*": []
+        },
+        maxSize: maxSize,
+        maxFiles: maxFiles,
+    });
 
     const isActive = files.length > 0;
 
@@ -60,9 +73,14 @@ const Dropzone:React.FC<DropzoneProps> = ({
             >
                 <input {...getInputProps()} className="h-full w-full overflow-hidden rounded-xl"/>
                 {  isDragActive 
-                ? (<p>Drop the file here ...</p>) 
-                : (<p> Drag n Drop file here </p>)
+                ? (
+                    <p>Drop the file here ...</p>) 
+                : (<>
+                    <p> Drag n Drop file here </p>
+                    <p>Up to {maxSize / dataFormat} MB, for up to {maxFiles} files</p>
+                </>)
                 }
+                
             </div>
         </div>
         

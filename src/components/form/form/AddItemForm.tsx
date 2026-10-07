@@ -119,7 +119,10 @@ export default function AddItemFrom() {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-col items-center">
                                 <ComponentsCard title="Picture" className="flex flex-col m-0 w-160 h-125">
-                                    <Dropzone Files={setImageFile}/>
+                                    <Dropzone 
+                                        Files={setImageFile} 
+                                        maxSize={10000000} 
+                                        maxFiles={7}/>
                                     <GalleryCard files={imageFile}/>
                                 </ComponentsCard>
                             </div>
