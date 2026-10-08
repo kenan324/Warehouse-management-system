@@ -59,8 +59,6 @@ export default function AddItemFrom() {
         fromValid,
         setForm,
         handleChange,
-        setImageFile,
-        imageFile,
     } = useItem();
 
     return (
@@ -120,10 +118,10 @@ export default function AddItemFrom() {
                             <div className="flex flex-col items-center">
                                 <ComponentsCard title="Picture" className="flex flex-col m-0 w-160 h-125">
                                     <Dropzone 
-                                        Files={setImageFile} 
                                         maxSize={10000000} 
-                                        maxFiles={7}/>
-                                    <GalleryCard files={imageFile}/>
+                                        maxFiles={7}>
+                                    {(files) => <GalleryCard files={files}/>}
+                                    </Dropzone>
                                 </ComponentsCard>
                             </div>
                         </div>
