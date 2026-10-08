@@ -39,7 +39,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                 className="h-full w-full object-contain transition-all duration-300"
                 />
             </div>
-            <div className="mt-3 grid grid-cols-4 gap-2">
+            <div className="mt-3 flex justify-center gap-2">
                 {images.map((image, index) => (
                     <button
                     key={index}
