@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { ImageFile } from "@/type/image-types";
 
@@ -29,6 +29,39 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
     // return null for undefined selectedImage
     if (!selectedImages) return null;
 
+    const handleMove = (direction : number) => {
+        if (!selectedImages) return;
+
+        const current = images.findIndex((img) => img === selectedImages);
+
+        const next = current + direction;
+        
+        if (next <= -1 || next === images.length) return;
+
+        setSelectedImages(images[next]);
+    }  
+
+    type MoveButtonProps = {
+        symbol: string; 
+        direction: number
+    }
+
+    const MoveButton: React.FC<MoveButtonProps> = ({
+        symbol,
+        direction,
+    }) => {
+        return (
+            <button
+                    onClick={() => {
+                        handleMove(direction);
+                    }}
+                    className={`relative overflow-hidden bg-blue-100 rounded border-transparent border-2 transition-all duration-100 hover:border-gray-300 active:border-black`}
+                > 
+                {symbol}
+            </button>
+        )
+    };
+
     return (
         <div className="flex flex-col w-full max-w-xl items-center justify-center rounded-2xl">
             <div className="relative h-70 w-full overflow-hidden rounded-xl">
@@ -40,6 +73,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                 />
             </div>
             <div className="mt-3 flex justify-center gap-2">
+                <MoveButton symbol="←" direction={-1}/>
                 {images.map((image, index) => (
                     <button
                     key={index}
@@ -59,6 +93,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                         />
                     </button>
                 ))}
+                <MoveButton symbol="→" direction={1}/>
             </div>
         </div>
     );
