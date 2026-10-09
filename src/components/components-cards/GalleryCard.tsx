@@ -13,7 +13,10 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
 }) => {
     const [images, setImages] = useState<ImageFile[]>([]);
     const [selectedImages, setSelectedImages] = useState<ImageFile | null> ();
+    const [index, setIndex] = useState<number>(0);
 
+    
+ 
     useEffect(() => {
         const imageFile = (files.map((file) => 
         // create preview to file property
@@ -39,7 +42,15 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
         if (next <= -1 || next === images.length) return;
 
         setSelectedImages(images[next]);
+        
+        if (next < index) setIndex(next)
+        if (next >= index + 5) setIndex(next - 4)
     }  
+
+    const visibleImages = images.slice(
+        index,
+        index + 5
+    )
 
     type MoveButtonProps = {
         symbol: string; 
@@ -74,7 +85,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
             </div>
             <div className="mt-3 flex justify-center gap-2">
                 <MoveButton symbol="←" direction={-1}/>
-                {images.map((image, index) => (
+                {visibleImages.map((image, index) => (
                     <button
                     key={index}
                     onClick={() => setSelectedImages(image)}

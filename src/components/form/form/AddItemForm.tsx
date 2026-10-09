@@ -119,7 +119,7 @@ export default function AddItemFrom() {
                                 <ComponentsCard title="Picture" className="flex flex-col m-0 w-160 h-125">
                                     <Dropzone 
                                         maxSize={10000000} 
-                                        maxFiles={7}>
+                                        maxFiles={10}>
                                     {(files) => <GalleryCard files={files}/>}
                                     </Dropzone>
                                 </ComponentsCard>
