@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { ImageFile } from "@/type/image-types";
+import GalleryModal from "./modal/galleryModal/GalleryModal";
 
 
 interface GalleryCardProp {
@@ -14,7 +15,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
     const [arrayOfImages, setArrayOfImages] = useState<ImageFile[]>([]);
     const [image, setImage] = useState<ImageFile | null> ();
     const [index, setIndex] = useState<number>(0);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
  
     useEffect(() => {
@@ -72,9 +73,22 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
             </button>
         )
     };
-
     return (
         <div className="flex flex-col w-full max-w-xl items-center justify-center rounded-2xl">
+            <button 
+            onClick={() => setIsModalOpen(true)}
+            >
+                Modal
+            </button>
+
+            <GalleryModal
+                open={isModalOpen}
+                onOpenChange={() => setIsModalOpen((prev) => !prev)}
+                images={arrayOfImages}
+                setImages={setArrayOfImages}
+            >
+
+            </GalleryModal>
             <div className="relative h-70 w-full overflow-hidden rounded-xl">
                 <Image 
                 src={image.preview}
