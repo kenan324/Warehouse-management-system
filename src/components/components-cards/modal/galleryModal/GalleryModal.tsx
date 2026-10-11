@@ -87,7 +87,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     <h2 className="text-xl font-bold  text-gray-800 dark:text-white/90">
                         Edit Gallery
                     </h2>
-                    <p> {images.length} photos</p>
+                    <p> {images.length} photos { !selecting && `· ${isSelected.length} selected`}</p>
                 </div>
                 <div className="flex justify-end items-end gap-2 mr-3">
                     <input {...getInputProps()}/>
