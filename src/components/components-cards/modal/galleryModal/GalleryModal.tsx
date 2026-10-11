@@ -24,9 +24,9 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     const [selecting, setSelecting] = useState(true);
     const [isSelected, setIsSelected] = useState<number[]>([]);
     
-    const handleAddImage = () => {
-        
+    const disabled = isSelected.length === 0;
 
+    const handleAddImage = () => {
     }
 
     const handleSelect  = () => {
@@ -36,8 +36,11 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     }
 
     const handleDelete = () => {
-
+        if (!isSelected) return;
+        setImages((prev) => prev.filter((_, index) => !isSelected.includes(index)));
+        setIsSelected([]);
     }
+
     const toggleSelect = (index: number) => {
         setIsSelected(
             (prev) => prev.includes(index) 
@@ -65,8 +68,13 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     </Button>
                     { !selecting && (
                         <Button 
-                            onClick={handleDelete}
-                            className={`w-25 h-10 border border-transparent bg-[#DC2626] text-white hover:border-black hover:bg-[#B91C1C] active:bg-[#7F1D1D] active:text-white/70 focus:border-black`}
+                            onClick={() => handleDelete()}
+                            disabled={disabled}
+                            className={`w-25 h-10 border border-transparent bg-[#DC2626] text-white hover:border-black hover:bg-[#B91C1C] active:bg-[#7F1D1D] active:text-white/70 focus:border-black
+                                ${
+                                    disabled ? "cursor-not-allowed opacity-40" : ""
+                                }
+                                `}
                         >
                             Delete
                         </Button>   
