@@ -2,6 +2,7 @@ import { ImageFile } from "@/type/image-types";
 import { Dialog, DialogContent } from "../../../ui/Dialog/dialog";
 import Image from "next/image";
 import { cn } from "cn";
+import { useState } from "react";
 
 
 interface GalleryModalProps {
@@ -18,7 +19,8 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     onOpenChange,
 }) => {
 
-
+    const [image, setImage] = useState<ImageFile | null> ();
+    
     return(
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent  className={cn(`flex flex-col w-[95vw]! h-[90vh]! max-w-4xl! overflow-hidden p-0 gap-0 rounded-2xl border border-gray-200 bg-white`)}>
@@ -31,9 +33,15 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 <div className="overflow-y-auto m-2 p-2 ">
                     <div className="mt-3 grid grid-cols-3 place-items-center gap-2">
                         {images.map((img, index) => (
-                            <div
+                            <button
                             key={index}
-                            className={`relative h-60 w-60 overflow-hidden rounded-2xl border-2 transition-all`}
+                            onClick={() => setImage(img)}
+                            className={`relative h-60 w-60 overflow-hidden rounded-2xl border-2 transition-all
+                                ${
+                                    image === img
+                                ? "border-black"
+                                : "border-transparent hover:border-gray-300"
+                                }`}
                             >
                                 <Image 
                                 src={img.preview}
@@ -41,7 +49,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                                 fill
                                 className="h-full w-full  object-cover "
                                 />
-                            </div>
+                            </button>
                         ))};
                     </div>
                 </div>
