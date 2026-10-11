@@ -2,8 +2,9 @@ import { ImageFile } from "@/type/image-types";
 import { Dialog, DialogContent } from "../../../ui/Dialog/dialog";
 import Image from "next/image";
 import { cn } from "cn";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useDropzone } from "react-dropzone";
 
 
 interface GalleryModalProps {
@@ -26,7 +27,37 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     
     const disabled = isSelected.length === 0;
 
+    // Calculate how many images can the user
+    const maxSize = 10 - images.length;
+
+    //def dropzone component 
+
+    const onDrop = useCallback( (acceptedFiles: File[]) => {
+            if (acceptedFiles.length) {
+                console.log("Accepted files:", acceptedFiles);
+                const imageFile = (acceptedFiles.map((file) => 
+                Object.assign(file, { preview: URL.createObjectURL(file) })
+                ));
+
+                setImages((prev) => [...imageFile, ...prev ])
+            }
+        },
+    [setImages]
+    )
+
+    const { open: openDropzone , getInputProps } = useDropzone({
+        accept: {
+            "image/*": [],
+        },
+        onDrop,
+        noKeyboard: true,
+        noDrag: true,
+        maxFiles: maxSize,
+        maxSize: 100000000
+    })
+
     const handleAddImage = () => {
+        openDropzone();
     }
 
     const handleSelect  = () => {
@@ -59,6 +90,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     <p> {images.length} photos</p>
                 </div>
                 <div className="flex justify-end items-end gap-2 mr-3">
+                    <input {...getInputProps()}/>
                     <Button
                         size="lg"
                         onClick={handleAddImage}
