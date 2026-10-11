@@ -22,17 +22,28 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
 
     const [image, setImage] = useState<ImageFile | null> ();
     const [selecting, setSelecting] = useState(true);
+    const [isSelected, setIsSelected] = useState<number[]>([]);
     
     const handleAddImage = () => {
+        
 
     }
 
     const handleSelect  = () => {
-
+        setImage(null);
+        if (!selecting) setIsSelected([]);
+        setSelecting((prev) => !prev)
     }
 
     const handleDelete = () => {
 
+    }
+    const toggleSelect = (index: number) => {
+        setIsSelected(
+            (prev) => prev.includes(index) 
+                ? prev.filter((i) => i !== index) 
+                : [...prev, index]
+        )
     }
 
     return(
@@ -61,10 +72,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                         </Button>   
                     )}
                     <Button 
-                        onClick={() => {
-                            setSelecting((prev) => !prev)
-                            handleSelect
-                        }}
+                        onClick={() => handleSelect()}
                         className={cn(`w-25 h-10 border border-black text-black hover:bg-[#eaeaea] active:border-gray-100 active:text-white/70 
                             ${
                                 selecting ? "bg-[#feffff]" : "bg-[#cacaca] focus:border-black"
@@ -80,13 +88,21 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                         {images.map((img, index) => (
                             <button
                             key={index}
-                            onClick={() => setImage(img)}
+                            onClick={() => {!selecting ? toggleSelect(index) :  setImage(img)  }}
                             className={`relative h-60 w-60 overflow-hidden rounded-2xl border-2 transition-all
                                 ${
-                                    image === img
+                                    image === img 
                                 ? "border-black"
                                 : "border-transparent hover:border-gray-300"
-                                }`}
+                                }
+                                ${
+                                    !selecting && isSelected.includes(index)
+                                ? "border-blue-500 ring-2 ring-blue-500"
+                                : ""
+                                }
+                                
+                                `}
+                                
                             >
                                 <Image 
                                 src={img.preview}
