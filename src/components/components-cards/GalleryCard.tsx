@@ -29,6 +29,12 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
         return () => imageFile.forEach((file) => URL.revokeObjectURL(file.preview))
     }, [files]);
 
+    useEffect(() => {
+        
+        if (!arrayOfImages.some((img) => img.name === image?.name)) {
+            setImage(arrayOfImages[0]);
+        }
+    }, [arrayOfImages, image]);
 
     // return null for undefined selectedImage
     if (!image) return null;
