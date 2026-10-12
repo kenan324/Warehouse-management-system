@@ -1,0 +1,9 @@
+
+
+const MAX_IMAGE_FILES = 10;
+const TOTAL_SIZE_OF_IMAGES_BYTES = 10 * 1000 * 1000;
+
+export {
+    MAX_IMAGE_FILES,
+    TOTAL_SIZE_OF_IMAGES_BYTES
+}

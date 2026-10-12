@@ -5,6 +5,7 @@ import { cn } from "cn";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useDropzone } from "react-dropzone";
+import { MAX_IMAGE_FILES, TOTAL_SIZE_OF_IMAGES_BYTES } from "../../../../constants/global" 
 
 
 interface GalleryModalProps {
@@ -28,7 +29,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     const disabled = isSelected.length === 0;
 
     // Calculate how many images can the user
-    const maxSize = 10 - images.length;
+    const maxSize = MAX_IMAGE_FILES - images.length;
 
     //def dropzone component 
 
@@ -53,7 +54,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
         noKeyboard: true,
         noDrag: true,
         maxFiles: maxSize,
-        maxSize: 100000000
+        maxSize: TOTAL_SIZE_OF_IMAGES_BYTES
     })
 
     const handleAddImage = () => {

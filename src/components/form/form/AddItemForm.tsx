@@ -14,6 +14,7 @@ import { useItem } from "@/hook/Form-Hook/useForm";
 import { getSelectedOption } from "@/utils/options/options";
 import Textarea from "../textarea/Textarea"; 
 import Dropzone from "@/components/ui/Dropzone/Dropzone";
+import { MAX_IMAGE_FILES, TOTAL_SIZE_OF_IMAGES_BYTES } from "@/constants/global";
 
 const options: Option[]= [
     {
@@ -118,8 +119,8 @@ export default function AddItemFrom() {
                             <div className="flex flex-col items-center">
                                 <ComponentsCard title="Picture" className="flex flex-col m-0 w-160 h-125">
                                     <Dropzone 
-                                        maxSize={10000000} 
-                                        maxFiles={10}>
+                                        maxSize={TOTAL_SIZE_OF_IMAGES_BYTES} 
+                                        maxFiles={MAX_IMAGE_FILES}>
                                     {(files) => <GalleryCard files={files}/>}
                                     </Dropzone>
                                 </ComponentsCard>
