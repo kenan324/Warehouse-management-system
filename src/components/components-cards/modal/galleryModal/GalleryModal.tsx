@@ -16,20 +16,20 @@ interface GalleryModalProps {
 }
 
 const GalleryModal: React.FC<GalleryModalProps> = ({
-    images,
-    setImages,
+    images: arrayOfImages,
+    setImages: setArrayOfImages,
     open,
     onOpenChange,
 }) => {
 
     const [image, setImage] = useState<ImageFile | null> ();
-    const [selecting, setSelecting] = useState(true);
+    const [selecting, setSelecting] = useState(false);
     const [isSelected, setIsSelected] = useState<number[]>([]);
     
     const disabled = isSelected.length === 0;
 
     // Calculate how many images can the user
-    const maxSize = MAX_IMAGE_FILES - images.length;
+    const maxSize = MAX_IMAGE_FILES - arrayOfImages.length;
 
     //def dropzone component 
 
@@ -40,10 +40,10 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 Object.assign(file, { preview: URL.createObjectURL(file) })
                 ));
 
-                setImages((prev) => [...imageFile, ...prev ])
+                setArrayOfImages((prev) => [...imageFile, ...prev ])
             }
         },
-    [setImages]
+    [setArrayOfImages]
     )
 
     const { open: openDropzone , getInputProps } = useDropzone({
@@ -63,13 +63,13 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
 
     const handleSelect  = () => {
         setImage(null);
-        if (!selecting) setIsSelected([]);
+        if (selecting) setIsSelected([]);
         setSelecting((prev) => !prev)
     }
 
     const handleDelete = () => {
         if (!isSelected) return;
-        setImages((prev) => prev.filter((_, index) => !isSelected.includes(index)));
+        setArrayOfImages((prev) => prev.filter((_, index) => !isSelected.includes(index)));
         setIsSelected([]);
     }
 
@@ -88,7 +88,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     <h2 className="text-xl font-bold  text-gray-800 dark:text-white/90">
                         Edit Gallery
                     </h2>
-                    <p> {images.length} photos { !selecting && `· ${isSelected.length} selected`}</p>
+                    <p> {arrayOfImages.length} photos { selecting && `· ${isSelected.length} selected`}</p>
                 </div>
                 <div className="flex justify-end items-end gap-2 mr-3">
                     <input {...getInputProps()}/>
@@ -99,7 +99,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     >
                         Add image
                     </Button>
-                    { !selecting && (
+                    { selecting && (
                         <Button 
                             onClick={() => handleDelete()}
                             disabled={disabled}
@@ -116,20 +116,20 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                         onClick={() => handleSelect()}
                         className={cn(`w-25 h-10 border border-black text-black hover:bg-[#eaeaea] active:border-gray-100 active:text-white/70 
                             ${
-                                selecting ? "bg-[#feffff]" : "bg-[#cacaca] focus:border-black"
+                                selecting ? "bg-[#cacaca] focus:border-black" : "bg-[#feffff]"
                             }`
                             
                         )}
                     >
-                         { selecting ? "Select" : "Done"} 
+                         { selecting ? "Done" : "Select"} 
                     </Button>
                 </div>
                 <div className="overflow-y-auto m-2 p-2 ">
                     <div className="mt-3 grid grid-cols-3 place-items-center gap-2">
-                        {images.map((img, index) => (
+                        {arrayOfImages.map((img, index) => (
                             <button
                             key={index}
-                            onClick={() => {!selecting ? toggleSelect(index) :  setImage(img)  }}
+                            onClick={() => {selecting ? toggleSelect(index) : setImage(img)}}
                             className={`relative h-60 w-60 overflow-hidden rounded-2xl border-2 transition-all
                                 ${
                                     image === img 
@@ -137,7 +137,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                                 : "border-transparent hover:border-gray-300"
                                 }
                                 ${
-                                    !selecting && isSelected.includes(index)
+                                    selecting && isSelected.includes(index)
                                 ? "border-blue-500 ring-2 ring-blue-500"
                                 : ""
                                 }
