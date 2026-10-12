@@ -41,6 +41,8 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 ));
 
                 setArrayOfImages((prev) => [...imageFile, ...prev ])
+                // to do refactor assign preview object 
+                return () => arrayOfImages.forEach((file) => URL.revokeObjectURL(file.preview));
             }
         },
     [setArrayOfImages]
