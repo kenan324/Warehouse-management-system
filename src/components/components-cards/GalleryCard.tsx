@@ -92,15 +92,16 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                 onOpenChange={() => setIsModalOpen((prev) => !prev)}
                 images={arrayOfImages}
                 setImages={setArrayOfImages}
-            >
-
-            </GalleryModal>
+            />
             <div className="relative h-70 w-full overflow-hidden rounded-xl">
                 <Image 
                 src={image.preview}
                 alt={image.name}
                 fill
-                className="h-full w-full object-contain transition-all duration-300"
+                unoptimized
+                priority
+                sizes="160px"
+                className="object-contain transition-opacity duration-300"
                 />
             </div>
             <div className="mt-3 flex justify-center gap-2">
@@ -109,7 +110,7 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                     <button
                     key={index}
                     onClick={() => setImage(img)}
-                    className={`relative h-20 w-20 overflow-hidden rounded-b-lg border-2 transition-all
+                    className={`relative h-20 w-20 overflow-hidden rounded-b-lg border-2 transition-opacity
                         ${
                             image === img
                                 ? "border-black"
@@ -120,7 +121,9 @@ const GalleryCard: React.FC<GalleryCardProp> = ({
                         src={img.preview}
                         alt={img.name}
                         fill
-                        className="h-full w-full  object-cover "
+                        unoptimized
+                        sizes="80px"
+                        className="object-cover"
                         />
                     </button>
                 ))}
